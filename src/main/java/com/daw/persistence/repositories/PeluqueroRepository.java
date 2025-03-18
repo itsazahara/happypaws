@@ -1,5 +1,9 @@
 package com.daw.persistence.repositories;
 
-public interface PeluqueroRepository {
+import org.springframework.data.repository.ListCrudRepository;
+
+import com.daw.persistence.entities.Peluquero;
+
+public interface PeluqueroRepository extends ListCrudRepository<Peluquero, Integer>{
 
 }
