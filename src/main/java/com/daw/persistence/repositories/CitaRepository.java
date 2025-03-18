@@ -1,5 +1,9 @@
 package com.daw.persistence.repositories;
 
-public interface CitaRepository {
+import org.springframework.data.repository.ListCrudRepository;
+
+import com.daw.persistence.entities.Cita;
+
+public interface CitaRepository extends ListCrudRepository<Cita, Integer>{
 
 }
