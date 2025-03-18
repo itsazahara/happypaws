@@ -1,5 +1,9 @@
 package com.daw.persistence.repositories;
 
-public interface ServicioRepository {
+import org.springframework.data.repository.ListCrudRepository;
+
+import com.daw.persistence.entities.Servicio;
+
+public interface ServicioRepository extends ListCrudRepository<Servicio, Integer>{
 
 }
