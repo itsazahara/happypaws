@@ -2,9 +2,13 @@ package com.daw.persistence.entities;
 
 import java.util.List;
 
+import com.daw.persistence.entities.enumerados.Tamaño;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,7 +34,9 @@ public class Mascota {
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    private Integer tamanio;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Tamaño tamaño;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)
