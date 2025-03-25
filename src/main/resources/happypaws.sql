@@ -1,5 +1,5 @@
 -- Insertar datos en la tabla cliente
-INSERT INTO cliente (id_cliente, nombre, email, telefono) VALUES
+INSERT INTO cliente (id, nombre, email, telefono) VALUES
 (1, 'Juan Pérez', 'juan.perez@email.com', '123456789'),
 (2, 'Ana García', 'ana.garcia@email.com', '987654321'),
 (3, 'Carlos López', 'carlos.lopez@email.com', '456123789'),
@@ -22,7 +22,7 @@ INSERT INTO cliente (id_cliente, nombre, email, telefono) VALUES
 (20, 'Verónica Montes', 'veronica.montes@email.com', '258369741');
 
 -- Insertar datos en la tabla peluquero
-INSERT INTO peluquero (id_peluquero, nombre, email, telefono) VALUES
+INSERT INTO peluquero (id, nombre, email, telefono) VALUES
 (1, 'Luis Moreno', 'luis.moreno@email.com', '654123987'),
 (2, 'Clara Ríos', 'clara.rios@email.com', '321987654'),
 (3, 'Pablo Navas', 'pablo.navas@email.com', '789654123'),
@@ -76,3 +76,50 @@ INSERT INTO cita (id_mascota, id_peluquero, fecha_hora, estado, observaciones) V
 (18, 19, '2025-04-18 11:30:00', 'Pendiente', 'Peinado especial'),
 (19, 20, '2025-04-19 12:30:00', 'Pendiente', 'Baño relajante'),
 (20, 1, '2025-04-20 13:30:00', 'Pendiente', 'Corte de pelo general');
+
+-- Insertar datos en la tabla servicio
+INSERT INTO servicio (id, nombre, descripcion, precio) VALUES
+(1, 'Corte de Pelo Básico', 'Corte de pelo estándar para perros de cualquier tamaño', 15.00),
+(2, 'Baño y Peinado', 'Baño con shampoo especial y peinado para mascotas', 20.00),
+(3, 'Limpieza de Oídos y Uñas', 'Limpieza profunda de oídos y corte de uñas', 12.00),
+(4, 'Baño Completo', 'Baño con shampoo medicado y secado especial', 25.00),
+(5, 'Desenredado de Pelaje', 'Cepillado y desenredado para razas con pelaje largo', 18.00),
+(6, 'Corte Especializado', 'Corte de pelo según raza y preferencias del dueño', 30.00),
+(7, 'Tratamiento Antipulgas', 'Aplicación de tratamiento antiparasitario', 22.00),
+(8, 'Corte de Uñas', 'Corte seguro de uñas con limado incluido', 10.00),
+(9, 'Cepillado Especial', 'Cepillado profundo para eliminar pelo muerto', 15.00),
+(10, 'Baño Medicinal', 'Baño con productos específicos para piel sensible', 28.00),
+(11, 'Hidratación de Piel', 'Tratamiento de hidratación para piel seca o irritada', 20.00),
+(12, 'Cepillado de Dientes', 'Limpieza bucal con cepillo y pasta especial para mascotas', 12.00),
+(13, 'Corte y Lavado Especial', 'Corte de pelo con lavado premium', 35.00),
+(14, 'Peinado Especial', 'Peinado con accesorios y perfumes para mascotas', 18.00),
+(15, 'Baño Relajante', 'Baño con aromaterapia y masaje relajante', 30.00),
+(16, 'Corte de pelo básico para perros y gatos', 'Corte básico', 15.00),
+(17, 'Baño con champú especial para mascotas', 'Baño', 20.00),
+(18, 'Limpieza de oídos y corte de uñas', 'Higiene completa', 25.00),
+(19, 'Tratamiento antipulgas y desparasitación', 'Antipulgas', 30.00),
+(20, 'Cepillado y desenredado de pelaje', 'Cepillado especial', 18.00);
+
+-- Insertar datos en la tabla cita_servicio
+INSERT INTO cita_servicio (id_cita, id_servicio) VALUES
+(1, 3),
+(1, 5),
+(2, 1),
+(2, 6),
+(3, 2),
+(3, 4),
+(4, 7),
+(4, 10),
+(5, 8),
+(5, 12),
+(6, 9),
+(6, 15),
+(7, 11),
+(7, 13),
+(8, 14),
+(9, 2),
+(10, 5),
+(11, 7),
+(12, 10),
+(13, 12);
+

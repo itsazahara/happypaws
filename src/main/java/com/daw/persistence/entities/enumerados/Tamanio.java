@@ -1,6 +1,6 @@
 package com.daw.persistence.entities.enumerados;
 
-public enum Tamaño {
+public enum Tamanio {
 	
 	PEQUEÑO, MEDIANO, GRANDE
 

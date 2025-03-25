@@ -1,13 +1,6 @@
 package com.daw.persistence.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,20 +16,17 @@ public class CitaServicio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "id_cita")
+	@Column(name = "id_cita", insertable = false, updatable = false)
 	private Integer idCita;
 
-	@Column(name = "id_servicio")
+	@Column(name = "id_servicio", insertable = false, updatable = false)
 	private Integer idServicio;
 
-	@Id
 	@ManyToOne
 	@JoinColumn(name = "id_cita")
 	private Cita cita;
 
-	@Id
 	@ManyToOne
 	@JoinColumn(name = "id_servicio")
 	private Servicio servicio;
-
 }

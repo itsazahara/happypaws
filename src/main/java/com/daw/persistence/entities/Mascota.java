@@ -2,7 +2,7 @@ package com.daw.persistence.entities;
 
 import java.util.List;
 
-import com.daw.persistence.entities.enumerados.Tamaño;
+import com.daw.persistence.entities.enumerados.Tamanio;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,7 +36,7 @@ public class Mascota {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Tamaño tamaño;
+    private Tamanio tamanio;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)
