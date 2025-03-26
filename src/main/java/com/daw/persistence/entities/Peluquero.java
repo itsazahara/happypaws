@@ -1,5 +1,6 @@
 package com.daw.persistence.entities;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -38,10 +39,10 @@ public class Peluquero {
     private String diaLaboral; // Ejemplo: "Lunes a Viernes"
     
     @Column(nullable = false, length = 100)
-    private String horarioInicio; // Ejemplo: "09:00"
+    private LocalTime horarioInicio; // Ejemplo: "09:00"
     
     @Column(nullable = false, length = 100)
-    private String horarioFin; // Ejemplo: "14:00"
+    private LocalTime horarioFin; // Ejemplo: "14:00"
 
     @OneToMany(mappedBy = "peluquero", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cita> citas;

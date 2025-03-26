@@ -21,38 +21,51 @@ INSERT INTO cliente (id, nombre, email, telefono) VALUES
 (19, 'Daniel Esteban', 'daniel.esteban@email.com', '147369852'),
 (20, 'Verónica Montes', 'veronica.montes@email.com', '258369741');
 
--- Insertar datos en la tabla peluquero
-INSERT INTO peluquero (id, nombre, email, telefono) VALUES
-(1, 'Luis Moreno', 'luis.moreno@email.com', '654123987'),
-(2, 'Clara Ríos', 'clara.rios@email.com', '321987654'),
-(3, 'Pablo Navas', 'pablo.navas@email.com', '789654123'),
-(4, 'Andrea Vargas', 'andrea.vargas@email.com', '987321654'),
-(5, 'Roberto Suárez', 'roberto.suarez@email.com', '123987654'),
-(6, 'Natalia León', 'natalia.leon@email.com', '741963852'),
-(7, 'Esteban Fuentes', 'esteban.fuentes@email.com', '963741852'),
-(8, 'Carolina Méndez', 'carolina.mendez@email.com', '852147963'),
-(9, 'José Ramírez', 'jose.ramirez@email.com', '159486357'),
-(10, 'Beatriz López', 'beatriz.lopez@email.com', '357486159'),
-(11, 'Ángel Domínguez', 'angel.dominguez@email.com', '753468951'),
-(12, 'Francisco Peña', 'francisco.pena@email.com', '468951753'),
-(13, 'Sandra Castillo', 'sandra.castillo@email.com', '852741369'),
-(14, 'Antonio Romero', 'antonio.romero@email.com', '741369852'),
-(15, 'Raquel Alonso', 'raquel.alonso@email.com', '369852741'),
-(16, 'Diego Espinoza', 'diego.espinoza@email.com', '147852963'),
-(17, 'Silvia Cabrera', 'silvia.cabrera@email.com', '258963741'),
-(18, 'Hugo Ortiz', 'hugo.ortiz@email.com', '369741258'),
-(19, 'Paula Ramos', 'paula.ramos@email.com', '147258963'),
-(20, 'Adrián Flores', 'adrian.flores@email.com', '258147369');
+-- Insertar datos en la tabla peluquero con nuevos atributos
+INSERT INTO peluquero (id, nombre, email, telefono, dia_laboral, horario_inicio, horario_fin) VALUES
+(1, 'Luis Moreno', 'luis.moreno@email.com', '654123987', 'Lunes-Viernes', '09:00:00', '14:00:00'),
+(2, 'Clara Ríos', 'clara.rios@email.com', '321987654', 'Martes-Sábado', '10:00:00', '19:00:00'),
+(3, 'Pablo Navas', 'pablo.navas@email.com', '789654123', 'Lunes-Viernes', '08:30:00', '17:30:00'),
+(4, 'Andrea Vargas', 'andrea.vargas@email.com', '987321654', 'Miércoles-Domingo', '11:00:00', '20:00:00'),
+(5, 'Roberto Suárez', 'roberto.suarez@email.com', '123987654', 'Lunes-Viernes', '09:00:00', '18:00:00'),
+(6, 'Natalia León', 'natalia.leon@email.com', '741963852', 'Martes-Sábado', '10:00:00', '19:00:00'),
+(7, 'Esteban Fuentes', 'esteban.fuentes@email.com', '963741852', 'Lunes-Viernes', '08:30:00', '17:30:00'),
+(8, 'Carolina Méndez', 'carolina.mendez@email.com', '852147963', 'Miércoles-Domingo', '11:00:00', '20:00:00'),
+(9, 'José Ramírez', 'jose.ramirez@email.com', '159486357', 'Lunes-Sábado', '07:00:00', '16:00:00'),
+(10, 'Beatriz López', 'beatriz.lopez@email.com', '357486159', 'Lunes-Viernes', '09:30:00', '18:30:00'),
+(11, 'Ángel Domínguez', 'angel.dominguez@email.com', '753468951', 'Martes-Sábado', '10:00:00', '19:00:00'),
+(12, 'Francisco Peña', 'francisco.pena@email.com', '468951753', 'Miércoles-Domingo', '12:00:00', '21:00:00'),
+(13, 'Sandra Castillo', 'sandra.castillo@email.com', '852741369', 'Lunes-Viernes', '08:00:00', '17:00:00'),
+(14, 'Antonio Romero', 'antonio.romero@email.com', '741369852', 'Martes-Sábado', '09:00:00', '18:00:00'),
+(15, 'Raquel Alonso', 'raquel.alonso@email.com', '369852741', 'Lunes-Viernes', '10:00:00', '19:00:00'),
+(16, 'Diego Espinoza', 'diego.espinoza@email.com', '147852963', 'Miércoles-Domingo', '11:00:00', '20:00:00'),
+(17, 'Silvia Cabrera', 'silvia.cabrera@email.com', '258963741', 'Lunes-Sábado', '07:30:00', '16:30:00'),
+(18, 'Hugo Ortiz', 'hugo.ortiz@email.com', '369741258', 'Lunes-Viernes', '09:00:00', '18:00:00'),
+(19, 'Paula Ramos', 'paula.ramos@email.com', '147258963', 'Martes-Sábado', '10:30:00', '19:30:00'),
+(20, 'Adrián Flores', 'adrian.flores@email.com', '258147369', 'Lunes-Viernes', '08:00:00', '17:00:00');
 
 -- Insertar datos en la tabla mascota
 INSERT INTO mascota (nombre, tamanio, id_cliente) VALUES
-('Max', 'Mediano', 1), ('Bella', 'Pequeño', 2), ('Luna', 'Grande', 3),
-('Rocky', 'Mediano', 4), ('Toby', 'Pequeño', 5), ('Milo', 'Grande', 6),
-('Nala', 'Mediano', 7), ('Simba', 'Pequeño', 8), ('Coco', 'Grande', 9),
-('Daisy', 'Mediano', 10), ('Bruno', 'Pequeño', 11), ('Sasha', 'Grande', 12),
-('Chico', 'Mediano', 13), ('Maggie', 'Pequeño', 14), ('Duke', 'Grande', 15),
-('Rex', 'Mediano', 16), ('Loki', 'Pequeño', 17), ('Oreo', 'Grande', 18),
-('Zeus', 'Mediano', 19), ('Lulu', 'Pequeño', 20);
+('Max', 'Mediano', 1), 
+('Bella', 'Pequeño', 2), 
+('Luna', 'Grande', 3),
+('Rocky', 'Mediano', 4), 
+('Toby', 'Pequeño', 5), 
+('Milo', 'Grande', 6),
+('Nala', 'Mediano', 7), 
+('Simba', 'Pequeño', 8), 
+('Coco', 'Grande', 9),
+('Daisy', 'Mediano', 10), 
+('Bruno', 'Pequeño', 11), 
+('Sasha', 'Grande', 12),
+('Chico', 'Mediano', 13), 
+('Maggie', 'Pequeño', 14), 
+('Duke', 'Grande', 15),
+('Rex', 'Mediano', 16), 
+('Loki', 'Pequeño', 17), 
+('Oreo', 'Grande', 18),
+('Zeus', 'Mediano', 19), 
+('Lulu', 'Pequeño', 20);
 
 -- Insertar datos en la tabla cita
 INSERT INTO cita (id_mascota, id_peluquero, id_cliente, fecha_hora, estado, observaciones) VALUES
