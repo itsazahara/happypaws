@@ -65,4 +65,19 @@ public class MascotaController {
 		return ResponseEntity.notFound().build();
 	}
 
+	@GetMapping("/cliente/{clienteId}")
+	public ResponseEntity<List<Mascota>> getMascotasByCliente(@PathVariable int idCliente) {
+		List<Mascota> mascotas = mascotaService.getMascotasByCliente(idCliente);
+		if (mascotas.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(mascotas);
+	}
+
+	@PostMapping("/add")
+	public ResponseEntity<Mascota> addMascota(@RequestBody Mascota mascota) {
+		Mascota nuevaMascota = mascotaService.addMascota(mascota);
+		return ResponseEntity.ok(nuevaMascota);
+	}
+
 }

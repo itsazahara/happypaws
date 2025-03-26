@@ -46,4 +46,12 @@ public class MascotaService {
 		return result;
 	}
 
+	public List<Mascota> getMascotasByCliente(int idCliente) {
+		return mascotaRepository.findByClienteId(idCliente);
+	}
+
+	public Mascota addMascota(Mascota mascota) {
+		return mascotaRepository.save(mascota);
+	}
+
 }
