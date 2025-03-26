@@ -65,5 +65,25 @@ public class ClienteController {
 
 		return ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("/buscar/nombre/{nombre}")
+    public ResponseEntity<List<Cliente>> buscarPorNombre(@PathVariable String nombre) {
+        return ResponseEntity.ok(clienteService.buscarPorNombre(nombre));
+    }
+
+    @GetMapping("/buscar/telefono/{telefono}")
+    public ResponseEntity<List<Cliente>> buscarPorTelefono(@PathVariable String telefono) {
+        return ResponseEntity.ok(clienteService.buscarPorTelefono(telefono));
+    }
+
+    /*@GetMapping("/{id}/historial")
+    public ResponseEntity<List<Cita>> obtenerHistorialCitas(@PathVariable Long id) {
+        return ResponseEntity.ok(clienteService.obtenerHistorialCitas(id));
+    }*/
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> actualizarDatosContacto(@PathVariable int id, @RequestBody Cliente datosActualizados) {
+        return ResponseEntity.ok(clienteService.actualizarDatosContacto(id, datosActualizados));
+    }
 
 }

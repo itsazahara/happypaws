@@ -12,7 +12,7 @@ public interface CitaRepository extends ListCrudRepository<Cita, Integer>{
 	
 	List<Cita> findByClienteId(int idCliente);
 
-    List<Cita> findByFecha(LocalDate fecha);
+    List<Cita> findByFechaHora(LocalDate fechaHora);
 
     List<Cita> findByEstado(Estado estado);
 

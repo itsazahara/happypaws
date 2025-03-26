@@ -48,6 +48,10 @@ public class Cita {
     private Estado estado;
 
     private String observaciones;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
 
     @OneToMany(mappedBy = "cita", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CitaServicio> citaServicios;

@@ -55,7 +55,7 @@ public class CitaService {
 	}
 
 	public List<Cita> obtenerCitasPorFecha(LocalDate fecha) {
-		return citaRepository.findByFecha(fecha);
+		return citaRepository.findByFechaHora(fecha);
 	}
 
 	public List<Cita> obtenerCitasPorEstado(Estado estado) {
