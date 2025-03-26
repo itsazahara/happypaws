@@ -33,6 +33,15 @@ public class Peluquero {
 
     @Column(nullable = false, length = 9)
     private String telefono;
+    
+    @Column(nullable = false, length = 100)
+    private String diaLaboral; // Ejemplo: "Lunes a Viernes"
+    
+    @Column(nullable = false, length = 100)
+    private String horarioInicio; // Ejemplo: "09:00"
+    
+    @Column(nullable = false, length = 100)
+    private String horarioFin; // Ejemplo: "14:00"
 
     @OneToMany(mappedBy = "peluquero", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cita> citas;
