@@ -55,27 +55,27 @@ INSERT INTO mascota (nombre, tamanio, id_cliente) VALUES
 ('Zeus', 'Mediano', 19), ('Lulu', 'Pequeño', 20);
 
 -- Insertar datos en la tabla cita
-INSERT INTO cita (id_mascota, id_peluquero, fecha_hora, estado, observaciones) VALUES
-(1, 2, '2025-04-01 10:00:00', 'Pendiente', 'Corte de pelo básico'),
-(2, 3, '2025-04-02 11:00:00', 'Pendiente', 'Baño y peinado'),
-(3, 4, '2025-04-03 09:00:00', 'Pendiente', 'Limpieza de oídos y uñas'),
-(4, 5, '2025-04-04 15:00:00', 'Pendiente', 'Baño completo'),
-(5, 6, '2025-04-05 14:30:00', 'Pendiente', 'Desenredado de pelaje'),
-(6, 7, '2025-04-06 12:00:00', 'Pendiente', 'Corte especializado'),
-(7, 8, '2025-04-07 13:00:00', 'Pendiente', 'Tratamiento antipulgas'),
-(8, 9, '2025-04-08 16:00:00', 'Pendiente', 'Corte de uñas'),
-(9, 10, '2025-04-09 17:00:00', 'Pendiente', 'Cepillado especial'),
-(10, 11, '2025-04-10 10:00:00', 'Pendiente', 'Corte y baño'),
-(11, 12, '2025-04-11 11:00:00', 'Pendiente', 'Corte básico'),
-(12, 13, '2025-04-12 12:00:00', 'Pendiente', 'Baño y corte de uñas'),
-(13, 14, '2025-04-13 14:00:00', 'Pendiente', 'Baño medicinal'),
-(14, 15, '2025-04-14 15:00:00', 'Pendiente', 'Hidratación de piel'),
-(15, 16, '2025-04-15 16:00:00', 'Pendiente', 'Cepillado de dientes'),
-(16, 17, '2025-04-16 17:00:00', 'Pendiente', 'Corte y lavado especial'),
-(17, 18, '2025-04-17 10:30:00', 'Pendiente', 'Baño completo'),
-(18, 19, '2025-04-18 11:30:00', 'Pendiente', 'Peinado especial'),
-(19, 20, '2025-04-19 12:30:00', 'Pendiente', 'Baño relajante'),
-(20, 1, '2025-04-20 13:30:00', 'Pendiente', 'Corte de pelo general');
+INSERT INTO cita (id_mascota, id_peluquero, id_cliente, fecha_hora, estado, observaciones) VALUES
+(1, 2, 2, '2025-04-01 10:00:00', 'Pendiente', 'Corte de pelo básico'),
+(2, 3, 3, '2025-04-02 11:00:00', 'Pendiente', 'Baño y peinado'),
+(3, 4, 4, '2025-04-03 09:00:00', 'Pendiente', 'Limpieza de oídos y uñas'),
+(4, 5, 5, '2025-04-04 15:00:00', 'Pendiente', 'Baño completo'),
+(5, 6, 6, '2025-04-05 14:30:00', 'Pendiente', 'Desenredado de pelaje'),
+(6, 7, 7, '2025-04-06 12:00:00', 'Pendiente', 'Corte especializado'),
+(7, 8, 8, '2025-04-07 13:00:00', 'Pendiente', 'Tratamiento antipulgas'),
+(8, 9, 9, '2025-04-08 16:00:00', 'Pendiente', 'Corte de uñas'),
+(9, 10, 10, '2025-04-09 17:00:00', 'Pendiente', 'Cepillado especial'),
+(10, 11, 11, '2025-04-10 10:00:00', 'Pendiente', 'Corte y baño'),
+(11, 12, 12, '2025-04-11 11:00:00', 'Pendiente', 'Corte básico'),
+(12, 13, 13, '2025-04-12 12:00:00', 'Pendiente', 'Baño y corte de uñas'),
+(13, 14, 14, '2025-04-13 14:00:00', 'Pendiente', 'Baño medicinal'),
+(14, 15, 15, '2025-04-14 15:00:00', 'Pendiente', 'Hidratación de piel'),
+(15, 16, 16, '2025-04-15 16:00:00', 'Pendiente', 'Cepillado de dientes'),
+(16, 17, 17, '2025-04-16 17:00:00', 'Pendiente', 'Corte y lavado especial'),
+(17, 18, 18, '2025-04-17 10:30:00', 'Pendiente', 'Baño completo'),
+(18, 19, 19, '2025-04-18 11:30:00', 'Pendiente', 'Peinado especial'),
+(19, 20, 20, '2025-04-19 12:30:00', 'Pendiente', 'Baño relajante'),
+(20, 1,  1, '2025-04-20 13:30:00', 'Pendiente', 'Corte de pelo general');
 
 -- Insertar datos en la tabla servicio
 INSERT INTO servicio (id, nombre, descripcion, precio) VALUES
@@ -122,4 +122,3 @@ INSERT INTO cita_servicio (id_cita, id_servicio) VALUES
 (11, 7),
 (12, 10),
 (13, 12);
-
