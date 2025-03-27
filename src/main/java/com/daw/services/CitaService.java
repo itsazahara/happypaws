@@ -1,6 +1,7 @@
 package com.daw.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,5 +76,12 @@ public class CitaService {
 		cita.setEstado(Estado.CANCELADA);
 		return citaRepository.save(cita);
 	}
+	
+	public boolean isHorarioDisponible(int idPeluquero, LocalDateTime fechaHora) {
+	    List<Cita> citas = citaRepository.findCitasByPeluqueroIdAndFechaHora(idPeluquero, fechaHora);
+	    return citas.isEmpty();
+	}
+
+
 
 }

@@ -44,9 +44,15 @@ public class CitaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Cita> create(@RequestBody Cita cita) {
-		return new ResponseEntity<Cita>(this.citaService.create(cita), HttpStatus.CREATED);
+	public ResponseEntity<?> create(@RequestBody Cita cita) {
+	    if (!citaService.isHorarioDisponible(cita.getPeluquero().getId(), cita.getFechaHora())) {
+	        return ResponseEntity.status(HttpStatus.CONFLICT).body("El horario ya está ocupado. Elige otra hora.");
+	    }
+
+	    Cita nuevaCita = citaService.create(cita);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(nuevaCita);
 	}
+
 
 	@PutMapping("/{idCita}")
 	public ResponseEntity<Cita> update(@PathVariable int idCita, @RequestBody Cita cita) {
@@ -60,13 +66,14 @@ public class CitaController {
 	}
 
 	@DeleteMapping("/{idCita}")
-	public ResponseEntity<Cita> delete(@PathVariable int idCita) {
-		if (this.citaService.delete(idCita)) {
-			return ResponseEntity.ok().build();
-		}
-
-		return ResponseEntity.notFound().build();
+	public ResponseEntity<?> delete(@PathVariable int idCita) {
+	    if (!this.citaService.existsCita(idCita)) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cita no encontrada.");
+	    }
+	    citaService.delete(idCita);
+	    return ResponseEntity.ok("Cita eliminada correctamente.");
 	}
+
 
 	@GetMapping("/cliente/{idCliente}")
 	public ResponseEntity<List<Cita>> obtenerCitasPorCliente(@PathVariable int idCliente) {
@@ -85,13 +92,25 @@ public class CitaController {
 	}
 
 	@PutMapping("/{id}/confirmar")
-	public ResponseEntity<Cita> confirmarCita(@PathVariable int id) {
-		return ResponseEntity.ok(citaService.confirmarCita(id));
+	public ResponseEntity<?> confirmarCita(@PathVariable int id) {
+		Optional<Cita> citaOpt = citaService.findById(id);
+		if (citaOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cita no encontrada.");
+		}
+
+		Cita citaConfirmada = citaService.confirmarCita(id);
+		return ResponseEntity.ok(citaConfirmada);
 	}
 
 	@PutMapping("/{id}/cancelar")
-	public ResponseEntity<Cita> cancelarCita(@PathVariable int id) {
-		return ResponseEntity.ok(citaService.cancelarCita(id));
+	public ResponseEntity<?> cancelarCita(@PathVariable int id) {
+		Optional<Cita> citaOpt = citaService.findById(id);
+		if (citaOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cita no encontrada.");
+		}
+
+		Cita citaCancelada = citaService.cancelarCita(id);
+		return ResponseEntity.ok(citaCancelada);
 	}
 
 }
