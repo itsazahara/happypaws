@@ -76,8 +76,8 @@ public class CitaController {
 
 
 	@GetMapping("/cliente/{idCliente}")
-	public ResponseEntity<List<Cita>> obtenerCitasPorCliente(@PathVariable int idCliente) {
-		return ResponseEntity.ok(citaService.obtenerCitasPorCliente(idCliente));
+	public ResponseEntity<List<Cita>> obtenerCitasPorMascota(@PathVariable int idMascota) {
+		return ResponseEntity.ok(citaService.obtenerCitasPorMascota(idMascota));
 	}
 
 	@GetMapping("/fecha/{fecha}")

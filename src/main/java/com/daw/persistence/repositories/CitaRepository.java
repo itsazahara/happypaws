@@ -11,7 +11,7 @@ import com.daw.persistence.entities.enumerados.Estado;
 
 public interface CitaRepository extends ListCrudRepository<Cita, Integer>{
 	
-	List<Cita> findByClienteId(int idCliente);
+	List<Cita> findByMascotaId(int idMascota);
 
     List<Cita> findByFechaHora(LocalDate fechaHora);
 

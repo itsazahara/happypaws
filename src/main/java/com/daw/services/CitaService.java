@@ -51,8 +51,8 @@ public class CitaService {
 		return result;
 	}
 
-	public List<Cita> obtenerCitasPorCliente(int idCliente) {
-		return citaRepository.findByClienteId(idCliente);
+	public List<Cita> obtenerCitasPorMascota(int idMascota) {
+		return citaRepository.findByMascotaId(idMascota);
 	}
 
 	public List<Cita> obtenerCitasPorFecha(LocalDate fecha) {

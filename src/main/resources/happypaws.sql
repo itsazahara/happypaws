@@ -23,26 +23,9 @@ INSERT INTO cliente (id, nombre, email, telefono) VALUES
 
 -- Insertar datos en la tabla peluquero con nuevos atributos
 INSERT INTO peluquero (id, nombre, email, telefono, dia_laboral, horario_inicio, horario_fin) VALUES
-(1, 'Luis Moreno', 'luis.moreno@email.com', '654123987', 'Lunes-Viernes', '09:00:00', '14:00:00'),
-(2, 'Clara Ríos', 'clara.rios@email.com', '321987654', 'Martes-Sábado', '10:00:00', '19:00:00'),
-(3, 'Pablo Navas', 'pablo.navas@email.com', '789654123', 'Lunes-Viernes', '08:30:00', '17:30:00'),
-(4, 'Andrea Vargas', 'andrea.vargas@email.com', '987321654', 'Miércoles-Domingo', '11:00:00', '20:00:00'),
-(5, 'Roberto Suárez', 'roberto.suarez@email.com', '123987654', 'Lunes-Viernes', '09:00:00', '18:00:00'),
-(6, 'Natalia León', 'natalia.leon@email.com', '741963852', 'Martes-Sábado', '10:00:00', '19:00:00'),
-(7, 'Esteban Fuentes', 'esteban.fuentes@email.com', '963741852', 'Lunes-Viernes', '08:30:00', '17:30:00'),
-(8, 'Carolina Méndez', 'carolina.mendez@email.com', '852147963', 'Miércoles-Domingo', '11:00:00', '20:00:00'),
-(9, 'José Ramírez', 'jose.ramirez@email.com', '159486357', 'Lunes-Sábado', '07:00:00', '16:00:00'),
-(10, 'Beatriz López', 'beatriz.lopez@email.com', '357486159', 'Lunes-Viernes', '09:30:00', '18:30:00'),
-(11, 'Ángel Domínguez', 'angel.dominguez@email.com', '753468951', 'Martes-Sábado', '10:00:00', '19:00:00'),
-(12, 'Francisco Peña', 'francisco.pena@email.com', '468951753', 'Miércoles-Domingo', '12:00:00', '21:00:00'),
-(13, 'Sandra Castillo', 'sandra.castillo@email.com', '852741369', 'Lunes-Viernes', '08:00:00', '17:00:00'),
-(14, 'Antonio Romero', 'antonio.romero@email.com', '741369852', 'Martes-Sábado', '09:00:00', '18:00:00'),
-(15, 'Raquel Alonso', 'raquel.alonso@email.com', '369852741', 'Lunes-Viernes', '10:00:00', '19:00:00'),
-(16, 'Diego Espinoza', 'diego.espinoza@email.com', '147852963', 'Miércoles-Domingo', '11:00:00', '20:00:00'),
-(17, 'Silvia Cabrera', 'silvia.cabrera@email.com', '258963741', 'Lunes-Sábado', '07:30:00', '16:30:00'),
-(18, 'Hugo Ortiz', 'hugo.ortiz@email.com', '369741258', 'Lunes-Viernes', '09:00:00', '18:00:00'),
-(19, 'Paula Ramos', 'paula.ramos@email.com', '147258963', 'Martes-Sábado', '10:30:00', '19:30:00'),
-(20, 'Adrián Flores', 'adrian.flores@email.com', '258147369', 'Lunes-Viernes', '08:00:00', '17:00:00');
+(1, 'Luis Moreno', 'luis.moreno@email.com', '654123987', 'Lunes-Viernes', '09:00:00', '13:00:00'),
+(2, 'Clara Ríos', 'clara.rios@email.com', '321987654', 'Lunes-Viernes', '15:00:00', '18:00:00'),
+(3, 'Pablo Navas', 'pablo.navas@email.com', '789654123', 'Lunes-Viernes', '19:00:00', '22:00:00');
 
 -- Insertar datos en la tabla mascota
 INSERT INTO mascota (nombre, tamanio, id_cliente) VALUES
@@ -69,25 +52,25 @@ INSERT INTO mascota (nombre, tamanio, id_cliente) VALUES
 
 -- Insertar datos en la tabla cita
 INSERT INTO cita (id_mascota, id_peluquero, id_cliente, fecha_hora, estado, observaciones) VALUES
-(1, 2, 2, '2025-04-01 10:00:00', 'Pendiente', 'Corte de pelo básico'),
-(2, 3, 3, '2025-04-02 11:00:00', 'Pendiente', 'Baño y peinado'),
-(3, 4, 4, '2025-04-03 09:00:00', 'Pendiente', 'Limpieza de oídos y uñas'),
-(4, 5, 5, '2025-04-04 15:00:00', 'Pendiente', 'Baño completo'),
-(5, 6, 6, '2025-04-05 14:30:00', 'Pendiente', 'Desenredado de pelaje'),
-(6, 7, 7, '2025-04-06 12:00:00', 'Pendiente', 'Corte especializado'),
-(7, 8, 8, '2025-04-07 13:00:00', 'Pendiente', 'Tratamiento antipulgas'),
-(8, 9, 9, '2025-04-08 16:00:00', 'Pendiente', 'Corte de uñas'),
-(9, 10, 10, '2025-04-09 17:00:00', 'Pendiente', 'Cepillado especial'),
-(10, 11, 11, '2025-04-10 10:00:00', 'Pendiente', 'Corte y baño'),
-(11, 12, 12, '2025-04-11 11:00:00', 'Pendiente', 'Corte básico'),
-(12, 13, 13, '2025-04-12 12:00:00', 'Pendiente', 'Baño y corte de uñas'),
-(13, 14, 14, '2025-04-13 14:00:00', 'Pendiente', 'Baño medicinal'),
-(14, 15, 15, '2025-04-14 15:00:00', 'Pendiente', 'Hidratación de piel'),
-(15, 16, 16, '2025-04-15 16:00:00', 'Pendiente', 'Cepillado de dientes'),
-(16, 17, 17, '2025-04-16 17:00:00', 'Pendiente', 'Corte y lavado especial'),
-(17, 18, 18, '2025-04-17 10:30:00', 'Pendiente', 'Baño completo'),
-(18, 19, 19, '2025-04-18 11:30:00', 'Pendiente', 'Peinado especial'),
-(19, 20, 20, '2025-04-19 12:30:00', 'Pendiente', 'Baño relajante'),
+(1, 1, 2, '2025-04-01 10:00:00', 'Pendiente', 'Corte de pelo básico'),
+(2, 1, 3, '2025-04-02 11:00:00', 'Pendiente', 'Baño y peinado'),
+(3, 1, 4, '2025-04-03 09:00:00', 'Pendiente', 'Limpieza de oídos y uñas'),
+(4, 1, 5, '2025-04-04 15:00:00', 'Pendiente', 'Baño completo'),
+(5, 1, 6, '2025-04-05 14:30:00', 'Pendiente', 'Desenredado de pelaje'),
+(6, 2, 7, '2025-04-06 12:00:00', 'Pendiente', 'Corte especializado'),
+(7, 2, 8, '2025-04-07 13:00:00', 'Pendiente', 'Tratamiento antipulgas'),
+(8, 2, 9, '2025-04-08 16:00:00', 'Pendiente', 'Corte de uñas'),
+(9, 2, 10, '2025-04-09 17:00:00', 'Pendiente', 'Cepillado especial'),
+(10, 2, 11, '2025-04-10 10:00:00', 'Pendiente', 'Corte y baño'),
+(11, 3, 12, '2025-04-11 11:00:00', 'Pendiente', 'Corte básico'),
+(12, 3, 13, '2025-04-12 12:00:00', 'Pendiente', 'Baño y corte de uñas'),
+(13, 3, 14, '2025-04-13 14:00:00', 'Pendiente', 'Baño medicinal'),
+(14, 3, 15, '2025-04-14 15:00:00', 'Pendiente', 'Hidratación de piel'),
+(15, 3, 16, '2025-04-15 16:00:00', 'Pendiente', 'Cepillado de dientes'),
+(16, 1, 17, '2025-04-16 17:00:00', 'Pendiente', 'Corte y lavado especial'),
+(17, 2, 18, '2025-04-17 10:30:00', 'Pendiente', 'Baño completo'),
+(18, 3, 19, '2025-04-18 11:30:00', 'Pendiente', 'Peinado especial'),
+(19, 2, 20, '2025-04-19 12:30:00', 'Pendiente', 'Baño relajante'),
 (20, 1,  1, '2025-04-20 13:30:00', 'Pendiente', 'Corte de pelo general');
 
 -- Insertar datos en la tabla servicio
