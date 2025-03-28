@@ -1,5 +1,9 @@
 package com.daw.persistence.repositories;
 
-public interface AdministradorRepository {
+import org.springframework.data.repository.ListCrudRepository;
+
+import com.daw.persistence.entities.Administrador;
+
+public interface AdministradorRepository extends ListCrudRepository<Administrador, Integer>{
 
 }
