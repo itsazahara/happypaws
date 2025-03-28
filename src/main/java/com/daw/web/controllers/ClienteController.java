@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
 
 import com.daw.persistence.entities.Cliente;
 import com.daw.services.ClienteService;
@@ -65,25 +65,5 @@ public class ClienteController {
 
 		return ResponseEntity.notFound().build();
 	}
-	
-	@GetMapping("/buscar/nombre/{nombre}")
-    public ResponseEntity<List<Cliente>> buscarPorNombre(@PathVariable String nombre) {
-        return ResponseEntity.ok(clienteService.buscarPorNombre(nombre));
-    }
-
-    @GetMapping("/buscar/telefono/{telefono}")
-    public ResponseEntity<List<Cliente>> buscarPorTelefono(@PathVariable String telefono) {
-        return ResponseEntity.ok(clienteService.buscarPorTelefono(telefono));
-    }
-
-    /*@GetMapping("/{id}/historial")
-    public ResponseEntity<List<Cita>> obtenerHistorialCitas(@PathVariable Long id) {
-        return ResponseEntity.ok(clienteService.obtenerHistorialCitas(id));
-    }*/
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> actualizarDatosContacto(@PathVariable int id, @RequestBody Cliente datosActualizados) {
-        return ResponseEntity.ok(clienteService.actualizarDatosContacto(id, datosActualizados));
-    }
 
 }

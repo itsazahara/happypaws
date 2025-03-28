@@ -2,9 +2,13 @@ package com.daw.persistence.entities;
 
 import java.util.List;
 
+import com.daw.persistence.entities.enumerados.Especie;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,26 +18,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "servicio")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Servicio {
+@Entity
+@Table(name = "raza")
+public class Raza {
 	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
     @Column(nullable = false, length = 100)
     private String nombre;
+    
+    @Enumerated(EnumType.STRING)
+    private Especie especie;
+    
+    @Column(nullable = false)
+    private String imagen;
 
-    @Column(columnDefinition = "DECIMAL(5,2)")
-    private double precio;
-
-    private String descripcion;
-
-    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CitaServicio> citaServicios;
-
+    @OneToMany(mappedBy = "raza", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mascota> mascotas;
 }

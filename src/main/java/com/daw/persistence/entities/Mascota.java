@@ -2,6 +2,8 @@ package com.daw.persistence.entities;
 
 import java.util.List;
 
+import com.daw.persistence.entities.enumerados.Especie;
+import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.persistence.entities.enumerados.Tamanio;
 
 import jakarta.persistence.CascadeType;
@@ -20,29 +22,59 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "mascota")
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "mascota")
 public class Mascota {
 	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
     @Column(nullable = false, length = 100)
     private String nombre;
-
+    
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    private Sexo sexo;
+    
+    @Enumerated(EnumType.STRING)
+    private Especie especie;
+    
+    @Enumerated(EnumType.STRING)
     private Tamanio tamanio;
+    
+    @Column(nullable = false)
+    private Integer edad;
+    
+    @Column(columnDefinition = "DECIMAL(5,2)")
+    private Double peso;
+    
+    private Boolean esterilizado;
+    
+    private Boolean vacunado;
+    
+    private Boolean desparasitado;
+    
+    @Column(nullable = false)
+    private String personalidad;
+    
+    @Column(nullable = false)
+    private String imagen;
+    
+    @Column(nullable = false)
+    private String cuidadosEspeciales;
+    
+    @Column(nullable = false)
+    private String historia;
+    
+    private Boolean disponibilidad;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Cliente cliente;
+    @JoinColumn(name = "id_raza", nullable = false)
+    private Raza raza;
 
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Cita> citas;
-
+    private List<Reserva> reservas;
 }
