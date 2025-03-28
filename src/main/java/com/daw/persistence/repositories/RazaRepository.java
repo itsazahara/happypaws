@@ -1,5 +1,9 @@
 package com.daw.persistence.repositories;
 
-public interface RazaRepository {
+import org.springframework.data.repository.ListCrudRepository;
+
+import com.daw.persistence.entities.Raza;
+
+public interface RazaRepository extends ListCrudRepository<Raza, Integer>{
 
 }
