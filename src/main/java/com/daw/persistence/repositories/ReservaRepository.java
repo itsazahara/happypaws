@@ -1,5 +1,9 @@
 package com.daw.persistence.repositories;
 
-public interface ReservaRepository {
+import org.springframework.data.repository.ListCrudRepository;
+
+import com.daw.persistence.entities.Reserva;
+
+public interface ReservaRepository extends ListCrudRepository<Reserva, Integer>{
 
 }
