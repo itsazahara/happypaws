@@ -236,3 +236,6 @@ INSERT INTO raza (nombre, especie, imagen) VALUES
 ('Tiffanie', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/breed_library/cat_tiffanie.jpg?itok=LDAn31K6'),
 ('Tonquinés', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/2021-02/CAT%20HERO_0027_Tonkinese.jpg?itok=G4nWTwvW'),
 ('Van turco', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/breed_library/cat_turkish_van.jpg?itok=3G0X3-CX');
+
+INSERT INTO administrador (nombre, apellidos, usuario, contrasenia, email, telefono, imagen) VALUES  
+('Azahara', 'Romero Schulte', 'aromsch', '1234', 'aazaharatkd14@gmail.com', '619046439', 'https://avatars.githubusercontent.com/u/159541934?v=4');
