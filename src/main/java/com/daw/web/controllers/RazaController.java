@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Raza;
@@ -64,5 +65,11 @@ public class RazaController {
 
 		return ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("/buscador")
+	public ResponseEntity<List<Raza>> findByNombre(@RequestParam String nombre) {
+	    return ResponseEntity.ok(this.razaService.getByNombre(nombre));
+	}
+
 
 }

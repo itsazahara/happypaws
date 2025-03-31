@@ -46,4 +46,8 @@ public class RazaService {
 		return result;
 	}
 
+	public List<Raza> getByNombre(String nombre) {
+		return this.razaRepository.findByNombreStartingWith(nombre);
+	}
+
 }
