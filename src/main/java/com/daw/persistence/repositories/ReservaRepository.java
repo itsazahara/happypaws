@@ -14,4 +14,7 @@ public interface ReservaRepository extends ListCrudRepository<Reserva, Integer>{
 	List<Reserva> findAllByOrderByFechaSolicitudAsc();
 	
     List<Reserva> findAllByOrderByFechaSolicitudDesc();
+    
+    List<Reserva> findByClienteId(Integer clienteId);
+
 }

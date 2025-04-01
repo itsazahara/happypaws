@@ -76,5 +76,10 @@ public class ReservaController {
 	public List<Reserva> getReservasOrdenadas(@RequestParam(defaultValue = "desc") String orden) {
         return reservaService.obtenerReservasOrdenadas(orden);
     }
+	
+	@GetMapping("/cliente/{clienteId}")
+    public List<Reserva> getReservasPorCliente(@PathVariable Integer clienteId) {
+        return reservaService.buscarPorCliente(clienteId);
+    }
 
 }

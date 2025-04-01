@@ -58,5 +58,9 @@ public class ReservaService {
             return reservaRepository.findAllByOrderByFechaSolicitudDesc();
         }
     }
+	
+	public List<Reserva> buscarPorCliente(Integer clienteId) {
+        return reservaRepository.findByClienteId(clienteId);
+    }
 
 }
