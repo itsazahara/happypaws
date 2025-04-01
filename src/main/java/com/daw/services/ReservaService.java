@@ -50,5 +50,13 @@ public class ReservaService {
 	public List<Reserva> buscarPorEstado(Estado estado) {
         return reservaRepository.findByEstado(estado);
     }
+	
+	public List<Reserva> obtenerReservasOrdenadas(String orden) {
+        if ("asc".equalsIgnoreCase(orden)) {
+            return reservaRepository.findAllByOrderByFechaSolicitudAsc();
+        } else {
+            return reservaRepository.findAllByOrderByFechaSolicitudDesc();
+        }
+    }
 
 }

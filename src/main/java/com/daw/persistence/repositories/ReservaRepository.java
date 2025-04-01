@@ -10,5 +10,8 @@ import com.daw.persistence.entities.enumerados.Estado;
 public interface ReservaRepository extends ListCrudRepository<Reserva, Integer>{
 	
 	List<Reserva> findByEstado(Estado estado);
-
+	
+	List<Reserva> findAllByOrderByFechaSolicitudAsc();
+	
+    List<Reserva> findAllByOrderByFechaSolicitudDesc();
 }

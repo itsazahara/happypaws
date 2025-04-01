@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Reserva;
@@ -69,6 +70,11 @@ public class ReservaController {
 	@GetMapping("/estado/{estado}")
     public List<Reserva> getReservasPorEstado(@PathVariable Estado estado) {
         return reservaService.buscarPorEstado(estado);
+    }
+	
+	@GetMapping("/ordenarPorFecha")
+	public List<Reserva> getReservasOrdenadas(@RequestParam(defaultValue = "desc") String orden) {
+        return reservaService.obtenerReservasOrdenadas(orden);
     }
 
 }
