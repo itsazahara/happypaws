@@ -246,3 +246,5 @@ INSERT INTO cliente (nombre, apellidos, usuario, contrasenia, email, direccion, 
 INSERT INTO mascota (nombre, sexo, especie, tamanio, edad, peso, esterilizado, vacunado, desparasitado, personalidad, imagen, cuidados_especiales, historia, disponibilidad, id_raza) VALUES 
 ('Luna', 'Hembra', 'Perro', 'Mediano', 3, 12.50, TRUE, TRUE, TRUE, 'Juguetona, amigable, le encanta correr en el parque.', 'imagen_luna.jpg', 'Necesita comida especial debido a una alergia.', 'Rescatada de la calle en condiciones difíciles, ahora busca un hogar amoroso.', TRUE, 422);
 
+INSERT INTO reserva (id_mascota, id_cliente, id_administrador, estado, observaciones) VALUES 
+(3, 1, 1, 'Pendiente', 'El cliente ha mostrado interés en adoptar a la mascota.');

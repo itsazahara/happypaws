@@ -1,8 +1,9 @@
 package com.daw.persistence.entities;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.daw.persistence.entities.enumerados.Estado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,14 +33,17 @@ public class Reserva {
 
 	@ManyToOne
 	@JoinColumn(name = "id_mascota", nullable = false)
+	@JsonIgnore
 	private Mascota mascota;
 
 	@ManyToOne
 	@JoinColumn(name = "id_cliente", nullable = false)
+	@JsonIgnore
 	private Cliente cliente;
 
 	@ManyToOne
 	@JoinColumn(name = "id_administrador", nullable = false)
+	@JsonIgnore
 	private Administrador administrador;
 
 	@Enumerated(EnumType.STRING)
@@ -47,6 +52,6 @@ public class Reserva {
 	@Column(nullable = true)
 	private String observaciones;
 
-	/*@Temporal(TemporalType.TIMESTAMP)*/
-	private Date fechaSolicitud;
+	@Column(name = "fecha_solicitud", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private LocalDateTime fechaSolicitud = LocalDateTime.now();
 }
