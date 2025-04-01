@@ -242,3 +242,7 @@ INSERT INTO administrador (nombre, apellidos, usuario, contrasenia, email, telef
 
 INSERT INTO cliente (nombre, apellidos, usuario, contrasenia, email, direccion, edad, telefono, ocupacion_laboral, tipo_vivienda, otras_mascotas, experiencia_mascotas, observaciones, imagen) VALUES 
 ('Juan', 'Pérez Gómez', 'juanpg', 'segura123', 'juan.perez@example.com', 'Calle Falsa 123', 30, '123456789', 'Ingeniero', 'Casa', TRUE, TRUE, 'Tiene experiencia con perros y gatos. Busca adoptar un cachorro.', 'imagen_perfil_juan.jpg');
+
+INSERT INTO mascota (nombre, sexo, especie, tamanio, edad, peso, esterilizado, vacunado, desparasitado, personalidad, imagen, cuidados_especiales, historia, disponibilidad, id_raza) VALUES 
+('Luna', 'Hembra', 'Perro', 'Mediano', 3, 12.50, TRUE, TRUE, TRUE, 'Juguetona, amigable, le encanta correr en el parque.', 'imagen_luna.jpg', 'Necesita comida especial debido a una alergia.', 'Rescatada de la calle en condiciones difíciles, ahora busca un hogar amoroso.', TRUE, 422);
+
