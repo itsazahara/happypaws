@@ -239,3 +239,6 @@ INSERT INTO raza (nombre, especie, imagen) VALUES
 
 INSERT INTO administrador (nombre, apellidos, usuario, contrasenia, email, telefono, imagen) VALUES  
 ('Azahara', 'Romero Schulte', 'aromsch', '1234', 'aazaharatkd14@gmail.com', '619046439', 'https://avatars.githubusercontent.com/u/159541934?v=4');
+
+INSERT INTO cliente (nombre, apellidos, usuario, contrasenia, email, direccion, edad, telefono, ocupacion_laboral, tipo_vivienda, otras_mascotas, experiencia_mascotas, observaciones, imagen) VALUES 
+('Juan', 'Pérez Gómez', 'juanpg', 'segura123', 'juan.perez@example.com', 'Calle Falsa 123', 30, '123456789', 'Ingeniero', 'Casa', TRUE, TRUE, 'Tiene experiencia con perros y gatos. Busca adoptar un cachorro.', 'imagen_perfil_juan.jpg');
