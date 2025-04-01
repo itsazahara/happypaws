@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.daw.persistence.entities.Reserva;
+import com.daw.persistence.entities.enumerados.Estado;
 import com.daw.persistence.repositories.ReservaRepository;
 
 @Service
@@ -45,5 +46,9 @@ public class ReservaService {
 
 		return result;
 	}
+	
+	public List<Reserva> buscarPorEstado(Estado estado) {
+        return reservaRepository.findByEstado(estado);
+    }
 
 }

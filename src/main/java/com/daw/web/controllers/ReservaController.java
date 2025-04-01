@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Reserva;
+import com.daw.persistence.entities.enumerados.Estado;
 import com.daw.services.ReservaService;
 
 @RestController
@@ -64,5 +65,10 @@ public class ReservaController {
 
 		return ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("/estado/{estado}")
+    public List<Reserva> getReservasPorEstado(@PathVariable Estado estado) {
+        return reservaService.buscarPorEstado(estado);
+    }
 
 }
