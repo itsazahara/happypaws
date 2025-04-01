@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.daw.persistence.entities.Mascota;
+import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.persistence.repositories.MascotaRepository;
 
 @Service
@@ -45,5 +46,9 @@ public class MascotaService {
 		
 		return result;
 	}
+	
+	public List<Mascota> buscarPorSexo(Sexo sexo) {
+        return mascotaRepository.findBySexo(sexo);
+    }
 
 }
