@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Mascota;
+import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.services.MascotaService;
 
@@ -70,6 +71,11 @@ public class MascotaController {
 	@GetMapping("/buscarPorSexo")
     public List<Mascota> buscarPorSexo(@RequestParam Sexo sexo) {
         return mascotaService.buscarPorSexo(sexo);
+    }
+	
+	@GetMapping("/buscarPorEspecie")
+    public List<Mascota> buscarPorEspecie(@RequestParam Especie especie) {
+        return mascotaService.buscarPorEspecie(especie);
     }
 
 }
