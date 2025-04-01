@@ -81,5 +81,10 @@ public class ReservaController {
     public List<Reserva> getReservasPorCliente(@PathVariable Integer clienteId) {
         return reservaService.buscarPorCliente(clienteId);
     }
+	
+	@PutMapping("/{id}/estado")
+    public Reserva actualizarEstadoReserva(@PathVariable Integer id, @RequestParam Estado nuevoEstado) {
+        return reservaService.actualizarEstado(id, nuevoEstado);
+    }
 
 }

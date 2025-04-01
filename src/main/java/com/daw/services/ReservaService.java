@@ -10,6 +10,8 @@ import com.daw.persistence.entities.Reserva;
 import com.daw.persistence.entities.enumerados.Estado;
 import com.daw.persistence.repositories.ReservaRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ReservaService {
 
@@ -61,6 +63,18 @@ public class ReservaService {
 	
 	public List<Reserva> buscarPorCliente(Integer clienteId) {
         return reservaRepository.findByClienteId(clienteId);
+    }
+	
+	@Transactional
+    public Reserva actualizarEstado(Integer id, Estado nuevoEstado) {
+        Optional<Reserva> reservaOptional = reservaRepository.findById(id);
+        if (reservaOptional.isPresent()) {
+            Reserva reserva = reservaOptional.get();
+            reserva.setEstado(nuevoEstado);
+            return reservaRepository.save(reserva);
+        } else {
+            throw new RuntimeException("Reserva no encontrada con ID: " + id);
+        }
     }
 
 }
