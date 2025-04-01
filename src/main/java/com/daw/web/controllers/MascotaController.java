@@ -77,5 +77,20 @@ public class MascotaController {
     public List<Mascota> buscarPorEspecie(@RequestParam Especie especie) {
         return mascotaService.buscarPorEspecie(especie);
     }
+	
+	@GetMapping("/esterilizado/{estado}")
+    public List<Mascota> getMascotasPorEsterilizado(@PathVariable Boolean estado) {
+        return mascotaService.buscarPorEsterilizado(estado);
+    }
+	
+	@GetMapping("/vacunado/{estado}")
+    public List<Mascota> getMascotasPorVacunado(@PathVariable Boolean estado) {
+        return mascotaService.buscarPorVacunado(estado);
+    }
+	
+	@GetMapping("/desparasitado/{estado}")
+    public List<Mascota> getMascotasPorDesparasitado(@PathVariable Boolean estado) {
+        return mascotaService.buscarPorDesparasitado(estado);
+    }
 
 }

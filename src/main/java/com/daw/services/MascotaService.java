@@ -55,5 +55,17 @@ public class MascotaService {
 	public List<Mascota> buscarPorEspecie(Especie especie) {
         return mascotaRepository.findByEspecie(especie);
     }
+	
+	public List<Mascota> buscarPorEsterilizado(Boolean esterilizado) {
+        return mascotaRepository.findByEsterilizado(esterilizado);
+    }
+	
+	public List<Mascota> buscarPorVacunado(Boolean vacunado) {
+        return mascotaRepository.findByVacunado(vacunado);
+    }
+	
+	public List<Mascota> buscarPorDesparasitado(Boolean desparasitado) {
+        return mascotaRepository.findByDesparasitado(desparasitado);
+    }
 
 }

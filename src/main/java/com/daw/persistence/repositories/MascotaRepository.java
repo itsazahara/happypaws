@@ -13,5 +13,11 @@ public interface MascotaRepository extends ListCrudRepository<Mascota, Integer>{
 	List<Mascota> findBySexo(Sexo sexo);
 	
 	List<Mascota> findByEspecie(Especie especie);
+	
+	List<Mascota> findByEsterilizado(Boolean esterilizado);
+	
+	List<Mascota> findByVacunado(Boolean vacunado);
+	
+	List<Mascota> findByDesparasitado(Boolean desparasitado);
 
 }
