@@ -93,16 +93,19 @@ public class MascotaController {
 		return mascotaService.buscarPorDesparasitado(estado);
 	}
 
+	/* FALTA LA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/esterilizado")
 	public Mascota actualizarEsterilizado(@PathVariable Integer id, @RequestParam Boolean esterilizado) {
 		return mascotaService.actualizarEsterilizado(id, esterilizado);
 	}
 
+	/* FALTA LA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/vacunado")
 	public Mascota actualizarVacunacion(@PathVariable Integer id, @RequestParam Boolean vacunado) {
 		return mascotaService.actualizarVacunacion(id, vacunado);
 	}
 
+	/* FALTA LA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/desparasitado")
 	public Mascota actualizarDesparasitado(@PathVariable Integer id, @RequestParam Boolean desparasitado) {
 		return mascotaService.actualizarDesparasitado(id, desparasitado);

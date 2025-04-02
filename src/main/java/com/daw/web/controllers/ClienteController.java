@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Cliente;
@@ -65,5 +66,10 @@ public class ClienteController {
 
 		return ResponseEntity.notFound().build();
 	}
+	
+	@PutMapping("/{id}/otras-mascotas")
+    public Cliente actualizarOtrasMascotas(@PathVariable Integer id, @RequestParam Boolean otrasMascotas) {
+        return clienteService.actualizarOtrasMascotas(id, otrasMascotas);
+    }
 
 }

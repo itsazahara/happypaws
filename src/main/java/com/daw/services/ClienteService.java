@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.daw.persistence.entities.Cliente;
 import com.daw.persistence.repositories.ClienteRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ClienteService {
 	
@@ -45,5 +47,17 @@ public class ClienteService {
 		
 		return result;
 	}
+	
+	@Transactional
+    public Cliente actualizarOtrasMascotas(Integer id, Boolean otrasMascotas) {
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+        if (clienteOptional.isPresent()) {
+            Cliente cliente = clienteOptional.get();
+            cliente.setOtrasMascotas(otrasMascotas);
+            return clienteRepository.save(cliente);
+        } else {
+            throw new RuntimeException("Cliente no encontrado con ID: " + id);
+        }
+    }
 
 }
