@@ -1,9 +1,7 @@
 package com.daw.services.mappers;
 
 import com.daw.persistence.entities.Administrador;
-import com.daw.persistence.entities.Cliente;
 import com.daw.services.dtos.AdministradorDTO;
-import com.daw.services.dtos.ClienteDTO;
 
 public class AdministradorMapper {
 	

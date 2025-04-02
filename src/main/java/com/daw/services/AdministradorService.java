@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.daw.persistence.entities.Administrador;
 import com.daw.persistence.repositories.AdministradorRepository;
+import com.daw.services.dtos.AdministradorDTO;
+import com.daw.services.mappers.AdministradorMapper;
 
 @Service
 public class AdministradorService {
@@ -35,15 +37,16 @@ public class AdministradorService {
 		return this.administradorRepository.save(administrador);
 	}
 	
-	public boolean delete(int idAdministrador) {
-		boolean result = false;
-		
-		if(this.administradorRepository.existsById(idAdministrador)) {
-			this.administradorRepository.deleteById(idAdministrador);
-			result = true;
-		}
-		
-		return result;
-	}
+	public AdministradorDTO delete(int idAdministrador) {
+        Optional<Administrador> administradorOptional = administradorRepository.findById(idAdministrador);
+
+        if (administradorOptional.isPresent()) {
+        	Administrador administrador = administradorOptional.get();
+        	administradorRepository.delete(administrador);
+            return AdministradorMapper.toDto(administrador);
+        }
+
+        return null;
+    }
 
 }

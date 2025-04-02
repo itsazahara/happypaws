@@ -1,5 +1,6 @@
 package com.daw.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Administrador;
 import com.daw.services.AdministradorService;
+import com.daw.services.dtos.AdministradorDTO;
+import com.daw.services.mappers.AdministradorMapper;
 
 @RestController
 @RequestMapping("/administradores")
@@ -26,41 +29,55 @@ public class AdministradorController {
 	private AdministradorService administradorService;
 
 	@GetMapping
-	public ResponseEntity<List<Administrador>> list() {
-		return ResponseEntity.ok(this.administradorService.findAll());
+	public ResponseEntity<List<AdministradorDTO>> administradores() {
+		List<Administrador> administradores = this.administradorService.findAll();
+		List<AdministradorDTO> administradoresDTO = new ArrayList<>();
+		for (Administrador administrador : administradores) {
+			administradoresDTO.add(AdministradorMapper.toDto(administrador));
+		}
+		return ResponseEntity.ok(administradoresDTO);
 	}
 
 	@GetMapping("/{idAdministrador}")
-	public ResponseEntity<Administrador> findById(@PathVariable int idAdministrador) {
+	public ResponseEntity<AdministradorDTO> cliente(@PathVariable int idAdministrador) {
 		Optional<Administrador> administrador = this.administradorService.findById(idAdministrador);
 		if (administrador.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 
-		return ResponseEntity.ok(administrador.get());
+		return ResponseEntity.ok(AdministradorMapper.toDto(administrador.get()));
 	}
 
 	@PostMapping
-	public ResponseEntity<Administrador> create(@RequestBody Administrador administrador) {
-		return new ResponseEntity<Administrador>(this.administradorService.create(administrador), HttpStatus.CREATED);
+	public ResponseEntity<AdministradorDTO> create(@RequestBody Administrador administrador) {
+		Administrador savedAdministrador = administradorService.create(administrador);
+		AdministradorDTO administradorDTO = AdministradorMapper.toDto(savedAdministrador);
+		return new ResponseEntity<>(administradorDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{idAdministrador}")
-	public ResponseEntity<Administrador> update(@PathVariable int idAdministrador,
-			@RequestBody Administrador administrador) {
-		if (idAdministrador != administrador.getId()) {
+	public ResponseEntity<AdministradorDTO> update(@PathVariable int idAdministrador,
+			@RequestBody AdministradorDTO administradorDTO) {
+		if (idAdministrador != administradorDTO.getId()) {
 			return ResponseEntity.badRequest().build();
-		} else if (!this.administradorService.existsAdministrador(idAdministrador)) {
+		}
+		if (!administradorService.existsAdministrador(idAdministrador)) {
 			return ResponseEntity.notFound().build();
 		}
 
-		return ResponseEntity.ok(this.administradorService.save(administrador));
+		Administrador administrador = AdministradorMapper.toEntity(administradorDTO);
+		Administrador updatedAdministrador = administradorService.save(administrador);
+		AdministradorDTO responseDTO = AdministradorMapper.toDto(updatedAdministrador);
+
+		return ResponseEntity.ok(responseDTO);
 	}
 
 	@DeleteMapping("/{idAdministrador}")
-	public ResponseEntity<Administrador> delete(@PathVariable int idAdministrador) {
-		if (this.administradorService.delete(idAdministrador)) {
-			return ResponseEntity.ok().build();
+	public ResponseEntity<AdministradorDTO> delete(@PathVariable int idAdministrador) {
+		AdministradorDTO administradorEliminado = administradorService.delete(idAdministrador);
+
+		if (administradorEliminado != null) {
+			return ResponseEntity.ok(administradorEliminado);
 		}
 
 		return ResponseEntity.notFound().build();
