@@ -78,5 +78,6 @@ public class Mascota {
     private Raza raza;
 
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
     private List<Reserva> reservas;
 }

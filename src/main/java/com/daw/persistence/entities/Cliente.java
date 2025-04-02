@@ -3,6 +3,7 @@ package com.daw.persistence.entities;
 import java.util.List;
 
 import com.daw.persistence.entities.enumerados.TipoVivienda;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -70,6 +71,7 @@ public class Cliente {
     private String imagen;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Reserva> reservas;
 
 }

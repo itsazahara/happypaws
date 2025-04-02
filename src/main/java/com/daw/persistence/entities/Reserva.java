@@ -33,12 +33,10 @@ public class Reserva {
 
 	@ManyToOne
 	@JoinColumn(name = "id_mascota", nullable = false)
-	@JsonIgnore
 	private Mascota mascota;
 
 	@ManyToOne
 	@JoinColumn(name = "id_cliente", nullable = false)
-	@JsonIgnore
 	private Cliente cliente;
 
 	@ManyToOne

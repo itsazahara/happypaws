@@ -47,7 +47,7 @@ public class RazaService {
 	}
 
 	public List<Raza> getByNombre(String nombre) {
-		return this.razaRepository.findByNombreStartingWith(nombre);
+		return this.razaRepository.findByNombreStartingWithIgnoreCase(nombre);
 	}
 
 }

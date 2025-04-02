@@ -8,6 +8,6 @@ import com.daw.persistence.entities.Raza;
 
 public interface RazaRepository extends ListCrudRepository<Raza, Integer>{
 	
-	List<Raza> findByNombreStartingWith(String nombre);
+	List<Raza> findByNombreStartingWithIgnoreCase(String nombre);
 
 }
