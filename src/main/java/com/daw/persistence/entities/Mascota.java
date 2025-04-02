@@ -70,7 +70,7 @@ public class Mascota {
     @Column(nullable = false)
     private String historia;
     
-    private Boolean disponibilidad;
+    private Boolean disponibilidad = true;
 
     @ManyToOne
     @JoinColumn(name = "id_raza", nullable = false)

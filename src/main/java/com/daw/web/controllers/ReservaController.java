@@ -82,6 +82,7 @@ public class ReservaController {
         return reservaService.buscarPorCliente(clienteId);
     }
 	
+	/* FALTA EL TESTING DE ESTE ENDPOINT */
 	@PutMapping("/{id}/estado")
     public Reserva actualizarEstadoReserva(@PathVariable Integer id, @RequestParam Estado nuevoEstado) {
         return reservaService.actualizarEstado(id, nuevoEstado);
