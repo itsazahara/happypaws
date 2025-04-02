@@ -1,5 +1,6 @@
 package com.daw.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Cliente;
 import com.daw.services.ClienteService;
+import com.daw.services.dtos.ClienteDTO;
+import com.daw.services.mappers.ClienteMapper;
 
 @RestController
 @RequestMapping("/clientes")
@@ -27,36 +30,47 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@GetMapping
-	public ResponseEntity<List<Cliente>> list(){
-		return ResponseEntity.ok(this.clienteService.findAll());
+	public ResponseEntity<List<ClienteDTO>> clientes(){
+		List<Cliente> clientes = this.clienteService.findAll();
+		List<ClienteDTO> clientesDTO = new ArrayList<>();
+		for(Cliente cliente : clientes) {
+			clientesDTO.add(ClienteMapper.toDto(cliente));
+		}
+		return ResponseEntity.ok(clientesDTO);
 	}
 	
 	@GetMapping("/{idCliente}")
-	public ResponseEntity<Cliente> findById(@PathVariable int idCliente) {
+	public ResponseEntity<ClienteDTO> cliente(@PathVariable int idCliente) {
 		Optional<Cliente> cliente = this.clienteService.findById(idCliente);
 		if(cliente.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(cliente.get());
+		return ResponseEntity.ok(ClienteMapper.toDto(cliente.get()));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cliente> create(@RequestBody Cliente cliente){
-		return new ResponseEntity<Cliente>(this.clienteService.create(cliente), HttpStatus.CREATED);
-	}
+    public ResponseEntity<ClienteDTO> create(@RequestBody Cliente cliente) {
+        Cliente savedCliente = clienteService.create(cliente);
+        ClienteDTO clienteDTO = ClienteMapper.toDto(savedCliente);
+        return new ResponseEntity<>(clienteDTO, HttpStatus.CREATED);
+    }
 	
 	@PutMapping("/{idCliente}")
-	public ResponseEntity<Cliente> update(@PathVariable int idCliente, @RequestBody Cliente cliente){
-		if(idCliente != cliente.getId()) {
-			return ResponseEntity.badRequest().build();
-		}
-		else if(!this.clienteService.existsCliente(idCliente)) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		return ResponseEntity.ok(this.clienteService.save(cliente));
-	}
+    public ResponseEntity<ClienteDTO> update(@PathVariable int idCliente, @RequestBody ClienteDTO clienteDTO) {
+        if (idCliente != clienteDTO.getId()) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (!clienteService.existsCliente(idCliente)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Cliente cliente = ClienteMapper.toEntity(clienteDTO);
+        Cliente updatedCliente = clienteService.save(cliente);
+        ClienteDTO responseDTO = ClienteMapper.toDto(updatedCliente);
+
+        return ResponseEntity.ok(responseDTO);
+    }
 	
 	@DeleteMapping("/{idCliente}")
 	public ResponseEntity<Cliente> delete(@PathVariable int idCliente){

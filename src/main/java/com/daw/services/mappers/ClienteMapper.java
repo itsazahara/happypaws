@@ -4,7 +4,7 @@ import com.daw.persistence.entities.Cliente;
 import com.daw.services.dtos.ClienteDTO;
 
 public class ClienteMapper {
-	
+
 	public static ClienteDTO toDto(Cliente cliente) {
 		ClienteDTO dto = new ClienteDTO();
 
@@ -22,10 +22,29 @@ public class ClienteMapper {
 		dto.setExperienciaMascotas(cliente.getExperienciaMascotas());
 		dto.setObservaciones(cliente.getObservaciones());
 		dto.setImagen(cliente.getImagen());
-		
+
 		return dto;
 
 	}
 
+	public static Cliente toEntity(ClienteDTO dto) {
+		Cliente c = new Cliente();
+
+		c.setId(dto.getId());
+		c.setNombre(dto.getNombre());
+		c.setApellidos(dto.getApellidos());
+		c.setUsuario(dto.getUsuario());
+		c.setTelefono(dto.getTelefono());
+		c.setEmail(dto.getTelefono());
+		c.setDireccion(dto.getDireccion());
+		c.setEdad(dto.getEdad());
+		c.setOcupacionLaboral(dto.getOcupacionLaboral());
+		c.setTipoVivienda(dto.getTipoVivienda());
+		c.setOtrasMascotas(dto.getOtrasMascotas());
+		c.setObservaciones(dto.getObservaciones());
+		c.setImagen(dto.getImagen());
+
+		return c;
+	}
 
 }
