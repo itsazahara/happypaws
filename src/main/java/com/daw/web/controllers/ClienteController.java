@@ -73,13 +73,15 @@ public class ClienteController {
     }
 	
 	@DeleteMapping("/{idCliente}")
-	public ResponseEntity<Cliente> delete(@PathVariable int idCliente){
-		if(this.clienteService.delete(idCliente)) {
-			return ResponseEntity.ok().build();
-		}
-
-		return ResponseEntity.notFound().build();
-	}
+    public ResponseEntity<ClienteDTO> delete(@PathVariable int idCliente) {
+        ClienteDTO clienteEliminado = clienteService.delete(idCliente);
+        
+        if (clienteEliminado != null) {
+            return ResponseEntity.ok(clienteEliminado);
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
 	
 	/* FALTA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/otras-mascotas")

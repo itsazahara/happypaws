@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.daw.persistence.entities.Cliente;
 import com.daw.persistence.repositories.ClienteRepository;
+import com.daw.services.dtos.ClienteDTO;
+import com.daw.services.mappers.ClienteMapper;
 
 import jakarta.transaction.Transactional;
 
@@ -37,16 +39,17 @@ public class ClienteService {
 		return this.clienteRepository.save(cliente);
 	}
 	
-	public boolean delete(int idCliente) {
-		boolean result = false;
-		
-		if(this.clienteRepository.existsById(idCliente)) {
-			this.clienteRepository.deleteById(idCliente);
-			result = true;
-		}
-		
-		return result;
-	}
+	public ClienteDTO delete(int idCliente) {
+        Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
+
+        if (clienteOptional.isPresent()) {
+            Cliente cliente = clienteOptional.get();
+            clienteRepository.delete(cliente);
+            return ClienteMapper.toDto(cliente);
+        }
+
+        return null;
+    }
 	
 	@Transactional
     public Cliente actualizarOtrasMascotas(Integer id, Boolean otrasMascotas) {
