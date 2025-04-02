@@ -67,30 +67,45 @@ public class MascotaController {
 
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	@GetMapping("/buscarPorSexo")
-    public List<Mascota> buscarPorSexo(@RequestParam Sexo sexo) {
-        return mascotaService.buscarPorSexo(sexo);
-    }
-	
+	public List<Mascota> buscarPorSexo(@RequestParam Sexo sexo) {
+		return mascotaService.buscarPorSexo(sexo);
+	}
+
 	@GetMapping("/buscarPorEspecie")
-    public List<Mascota> buscarPorEspecie(@RequestParam Especie especie) {
-        return mascotaService.buscarPorEspecie(especie);
-    }
-	
+	public List<Mascota> buscarPorEspecie(@RequestParam Especie especie) {
+		return mascotaService.buscarPorEspecie(especie);
+	}
+
 	@GetMapping("/esterilizado/{estado}")
-    public List<Mascota> getMascotasPorEsterilizado(@PathVariable Boolean estado) {
-        return mascotaService.buscarPorEsterilizado(estado);
-    }
-	
+	public List<Mascota> getMascotasPorEsterilizado(@PathVariable Boolean estado) {
+		return mascotaService.buscarPorEsterilizado(estado);
+	}
+
 	@GetMapping("/vacunado/{estado}")
-    public List<Mascota> getMascotasPorVacunado(@PathVariable Boolean estado) {
-        return mascotaService.buscarPorVacunado(estado);
-    }
-	
+	public List<Mascota> getMascotasPorVacunado(@PathVariable Boolean estado) {
+		return mascotaService.buscarPorVacunado(estado);
+	}
+
 	@GetMapping("/desparasitado/{estado}")
-    public List<Mascota> getMascotasPorDesparasitado(@PathVariable Boolean estado) {
-        return mascotaService.buscarPorDesparasitado(estado);
-    }
+	public List<Mascota> getMascotasPorDesparasitado(@PathVariable Boolean estado) {
+		return mascotaService.buscarPorDesparasitado(estado);
+	}
+
+	@PutMapping("/{id}/esterilizado")
+	public Mascota actualizarEsterilizado(@PathVariable Integer id, @RequestParam Boolean esterilizado) {
+		return mascotaService.actualizarEsterilizado(id, esterilizado);
+	}
+
+	@PutMapping("/{id}/vacunado")
+	public Mascota actualizarVacunacion(@PathVariable Integer id, @RequestParam Boolean vacunado) {
+		return mascotaService.actualizarVacunacion(id, vacunado);
+	}
+
+	@PutMapping("/{id}/desparasitado")
+	public Mascota actualizarDesparasitado(@PathVariable Integer id, @RequestParam Boolean desparasitado) {
+		return mascotaService.actualizarDesparasitado(id, desparasitado);
+	}
 
 }

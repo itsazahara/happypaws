@@ -87,5 +87,7 @@ public class ReservaController {
     public Reserva actualizarEstadoReserva(@PathVariable Integer id, @RequestParam Estado nuevoEstado) {
         return reservaService.actualizarEstado(id, nuevoEstado);
     }
+	
+	/* FALTA COMPROBAR EL ENDPOINT DE ACTUALIZAR LA DISPONIBILIDAD */
 
 }
