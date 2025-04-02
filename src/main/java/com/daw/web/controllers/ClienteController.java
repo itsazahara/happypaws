@@ -67,6 +67,7 @@ public class ClienteController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	/* FALTA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/otras-mascotas")
     public Cliente actualizarOtrasMascotas(@PathVariable Integer id, @RequestParam Boolean otrasMascotas) {
         return clienteService.actualizarOtrasMascotas(id, otrasMascotas);
