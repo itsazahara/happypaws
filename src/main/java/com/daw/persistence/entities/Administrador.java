@@ -34,7 +34,7 @@ public class Administrador {
     @Column(nullable = false, length = 100)
     private String usuario;
     
-    @Column(nullable = false, length = 100)
+    @Column(nullable = true, length = 100)
     private String contrasenia;
     
     @Column(nullable = false, length = 100)
