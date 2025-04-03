@@ -5,7 +5,9 @@ import java.util.List;
 import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.persistence.entities.enumerados.Tamanio;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -74,8 +76,10 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "id_raza", nullable = false)
-    @JsonIgnore
+    @JsonBackReference
+    @JsonIgnoreProperties({"mascotas", "id", "especie", "imagen"})
     private Raza raza;
+
 
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore

@@ -3,6 +3,8 @@ package com.daw.persistence.entities;
 import java.util.List;
 
 import com.daw.persistence.entities.enumerados.Especie;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,5 +41,8 @@ public class Raza {
     private String imagen;
 
     @OneToMany(mappedBy = "raza", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"raza"})
+    @JsonManagedReference
     private List<Mascota> mascotas;
+
 }
