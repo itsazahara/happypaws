@@ -8,6 +8,7 @@ import com.daw.persistence.entities.enumerados.Tamanio;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -76,7 +77,7 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "id_raza", nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
     @JsonIgnoreProperties({"mascotas", "id", "especie", "imagen"})
     private Raza raza;
 
