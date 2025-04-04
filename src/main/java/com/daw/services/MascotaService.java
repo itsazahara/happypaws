@@ -10,6 +10,8 @@ import com.daw.persistence.entities.Mascota;
 import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.persistence.repositories.MascotaRepository;
+import com.daw.services.dtos.MascotaDTO;
+import com.daw.services.mappers.MascotaMapper;
 
 import jakarta.transaction.Transactional;
 
@@ -39,16 +41,17 @@ public class MascotaService {
 		return this.mascotaRepository.save(mascota);
 	}
 
-	public boolean delete(int idMascota) {
-		boolean result = false;
+	public MascotaDTO delete(int idMascota) {
+        Optional<Mascota> mascotaOptional = mascotaRepository.findById(idMascota);
 
-		if (this.mascotaRepository.existsById(idMascota)) {
-			this.mascotaRepository.deleteById(idMascota);
-			result = true;
-		}
+        if (mascotaOptional.isPresent()) {
+        	Mascota mascota = mascotaOptional.get();
+        	mascotaRepository.delete(mascota);
+            return MascotaMapper.toDTO(mascota);
+        }
 
-		return result;
-	}
+        return null;
+    }
 
 	public List<Mascota> buscarPorSexo(Sexo sexo) {
 		return mascotaRepository.findBySexo(sexo);

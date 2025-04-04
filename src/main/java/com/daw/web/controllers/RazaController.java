@@ -65,11 +65,10 @@ public class RazaController {
 
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	@GetMapping("/buscador")
 	public ResponseEntity<List<Raza>> findByNombre(@RequestParam String nombre) {
-	    return ResponseEntity.ok(this.razaService.getByNombre(nombre));
+		return ResponseEntity.ok(this.razaService.getByNombre(nombre));
 	}
-
 
 }

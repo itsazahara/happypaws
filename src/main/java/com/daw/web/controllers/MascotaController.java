@@ -1,5 +1,6 @@
 package com.daw.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,8 @@ import com.daw.persistence.entities.Mascota;
 import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.services.MascotaService;
+import com.daw.services.dtos.MascotaDTO;
+import com.daw.services.mappers.MascotaMapper;
 
 @RestController
 @RequestMapping("/mascotas")
@@ -29,44 +32,58 @@ public class MascotaController {
 	private MascotaService mascotaService;
 
 	@GetMapping
-	public ResponseEntity<List<Mascota>> list() {
-		return ResponseEntity.ok(this.mascotaService.findAll());
+	public ResponseEntity<List<MascotaDTO>> mascotas(){
+		List<Mascota> mascotas = this.mascotaService.findAll();
+		List<MascotaDTO> mascotasDTO = new ArrayList<>();
+		for(Mascota mascota : mascotas) {
+			mascotasDTO.add(MascotaMapper.toDTO(mascota));
+		}
+		return ResponseEntity.ok(mascotasDTO);
 	}
 
 	@GetMapping("/{idMascota}")
-	public ResponseEntity<Mascota> findById(@PathVariable int idMascota) {
+	public ResponseEntity<MascotaDTO> mascota(@PathVariable int idMascota) {
 		Optional<Mascota> mascota = this.mascotaService.findById(idMascota);
-		if (mascota.isEmpty()) {
+		if(mascota.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-
-		return ResponseEntity.ok(mascota.get());
+		
+		return ResponseEntity.ok(MascotaMapper.toDTO(mascota.get()));
 	}
 
 	@PostMapping
-	public ResponseEntity<Mascota> create(@RequestBody Mascota mascota) {
-		return new ResponseEntity<Mascota>(this.mascotaService.create(mascota), HttpStatus.CREATED);
-	}
+    public ResponseEntity<MascotaDTO> create(@RequestBody Mascota mascota) {
+		Mascota savedMascota = mascotaService.create(mascota);
+		MascotaDTO mascotaDTO = MascotaMapper.toDTO(savedMascota);
+        return new ResponseEntity<>(mascotaDTO, HttpStatus.CREATED);
+    }
 
 	@PutMapping("/{idMascota}")
-	public ResponseEntity<Mascota> update(@PathVariable int idMascota, @RequestBody Mascota mascota) {
-		if (idMascota != mascota.getId()) {
-			return ResponseEntity.badRequest().build();
-		} else if (!this.mascotaService.existsMascota(idMascota)) {
-			return ResponseEntity.notFound().build();
-		}
+    public ResponseEntity<MascotaDTO> update(@PathVariable int idMascota, @RequestBody MascotaDTO mascotaDTO) {
+        if (idMascota != mascotaDTO.getId()) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (!mascotaService.existsMascota(idMascota)) {
+            return ResponseEntity.notFound().build();
+        }
 
-		return ResponseEntity.ok(this.mascotaService.save(mascota));
-	}
+        Mascota mascota = MascotaMapper.toEntity(mascotaDTO);
+        Mascota updatedMascota = mascotaService.save(mascota);
+        MascotaDTO responseDTO = MascotaMapper.toDTO(updatedMascota);
+
+        return ResponseEntity.ok(responseDTO);
+    }
 
 	@DeleteMapping("/{idMascota}")
-	public ResponseEntity<Mascota> delete(@PathVariable int idMascota) {
-		if (this.mascotaService.delete(idMascota)) {
-			return ResponseEntity.ok().build();
-		}
-
-		return ResponseEntity.notFound().build();
-	}
+    public ResponseEntity<MascotaDTO> delete(@PathVariable int idMascota) {
+		MascotaDTO mascotaEliminado = mascotaService.delete(idMascota);
+        
+        if (mascotaEliminado != null) {
+            return ResponseEntity.ok(mascotaEliminado);
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
 
 	@GetMapping("/buscarPorSexo")
 	public List<Mascota> buscarPorSexo(@RequestParam Sexo sexo) {
