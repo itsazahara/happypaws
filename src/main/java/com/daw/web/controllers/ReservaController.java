@@ -1,5 +1,6 @@
 package com.daw.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.daw.persistence.entities.Reserva;
 import com.daw.persistence.entities.enumerados.Estado;
 import com.daw.services.ReservaService;
+import com.daw.services.dtos.ReservaDTO;
+import com.daw.services.mappers.ReservaMapper;
 
 @RestController
 @RequestMapping("/reservas")
@@ -28,44 +31,58 @@ public class ReservaController {
 	private ReservaService reservaService;
 
 	@GetMapping
-	public ResponseEntity<List<Reserva>> list() {
-		return ResponseEntity.ok(this.reservaService.findAll());
+	public ResponseEntity<List<ReservaDTO>> reservas(){
+		List<Reserva> reservas = this.reservaService.findAll();
+		List<ReservaDTO> reservasDTO = new ArrayList<>();
+		for(Reserva reserva : reservas) {
+			reservasDTO.add(ReservaMapper.toDTO(reserva, false));
+		}
+		return ResponseEntity.ok(reservasDTO);
 	}
-
+	
 	@GetMapping("/{idReserva}")
-	public ResponseEntity<Reserva> findById(@PathVariable int idReserva) {
+	public ResponseEntity<ReservaDTO> reserva(@PathVariable int idReserva) {
 		Optional<Reserva> reserva = this.reservaService.findById(idReserva);
-		if (reserva.isEmpty()) {
+		if(reserva.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-
-		return ResponseEntity.ok(reserva.get());
+		
+		return ResponseEntity.ok(ReservaMapper.toDTO(reserva.get(), false));
 	}
 
 	@PostMapping
-	public ResponseEntity<Reserva> create(@RequestBody Reserva reserva) {
-		return new ResponseEntity<Reserva>(this.reservaService.create(reserva), HttpStatus.CREATED);
-	}
+    public ResponseEntity<ReservaDTO> create(@RequestBody Reserva reserva) {
+		Reserva savedReserva = reservaService.create(reserva);
+		ReservaDTO reservaDTO = ReservaMapper.toDTO(savedReserva, false);
+        return new ResponseEntity<>(reservaDTO, HttpStatus.CREATED);
+    }
 
 	@PutMapping("/{idReserva}")
-	public ResponseEntity<Reserva> update(@PathVariable int idReserva, @RequestBody Reserva reserva) {
-		if (idReserva != reserva.getId()) {
-			return ResponseEntity.badRequest().build();
-		} else if (!this.reservaService.existsReserva(idReserva)) {
-			return ResponseEntity.notFound().build();
-		}
+    public ResponseEntity<ReservaDTO> update(@PathVariable int idReserva, @RequestBody ReservaDTO reservaDTO) {
+        if (idReserva != reservaDTO.getId()) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (!reservaService.existsReserva(idReserva)) {
+            return ResponseEntity.notFound().build();
+        }
 
-		return ResponseEntity.ok(this.reservaService.save(reserva));
-	}
+        Reserva reserva = ReservaMapper.toEntity(reservaDTO);
+        Reserva updatedReserva = reservaService.save(reserva);
+        ReservaDTO responseDTO = ReservaMapper.toDTO(updatedReserva, false);
+
+        return ResponseEntity.ok(responseDTO);
+    }
 
 	@DeleteMapping("/{idReserva}")
-	public ResponseEntity<Reserva> delete(@PathVariable int idReserva) {
-		if (this.reservaService.delete(idReserva)) {
-			return ResponseEntity.ok().build();
-		}
-
-		return ResponseEntity.notFound().build();
-	}
+    public ResponseEntity<ReservaDTO> delete(@PathVariable int idReserva) {
+		ReservaDTO reservaEliminado = reservaService.delete(idReserva);
+        
+        if (reservaEliminado != null) {
+            return ResponseEntity.ok(reservaEliminado);
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
 	
 	@GetMapping("/estado/{estado}")
     public List<Reserva> getReservasPorEstado(@PathVariable Estado estado) {

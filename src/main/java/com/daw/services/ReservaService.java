@@ -11,6 +11,8 @@ import com.daw.persistence.entities.Reserva;
 import com.daw.persistence.entities.enumerados.Estado;
 import com.daw.persistence.repositories.MascotaRepository;
 import com.daw.persistence.repositories.ReservaRepository;
+import com.daw.services.dtos.ReservaDTO;
+import com.daw.services.mappers.ReservaMapper;
 
 import jakarta.transaction.Transactional;
 
@@ -43,16 +45,17 @@ public class ReservaService {
 		return this.reservaRepository.save(reserva);
 	}
 
-	public boolean delete(int idReserva) {
-		boolean result = false;
+	public ReservaDTO delete(int idReserva) {
+        Optional<Reserva> reservaOptional = reservaRepository.findById(idReserva);
 
-		if (this.reservaRepository.existsById(idReserva)) {
-			this.reservaRepository.deleteById(idReserva);
-			result = true;
-		}
+        if (reservaOptional.isPresent()) {
+        	Reserva reserva = reservaOptional.get();
+        	reservaRepository.delete(reserva);
+            return ReservaMapper.toDTO(reserva, false);
+        }
 
-		return result;
-	}
+        return null;
+    }
 	
 	public List<Reserva> buscarPorEstado(Estado estado) {
         return reservaRepository.findByEstado(estado);
