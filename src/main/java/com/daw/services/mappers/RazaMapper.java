@@ -11,7 +11,7 @@ public class RazaMapper {
 		RazaDTO dto = new RazaDTO();
 		dto.setNombre(raza.getNombre());
 		dto.setId(raza.getId());
-
+		
 		if (includeMascotas && raza.getMascotas() != null) {
 			dto.setMascotas(raza.getMascotas().stream().map(MascotaMapper::toDTO).collect(Collectors.toList()));
 		}

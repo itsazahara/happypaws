@@ -72,7 +72,7 @@ public class Mascota {
     
     private Boolean disponibilidad = true;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_raza", nullable = false)
     private Raza raza;
 

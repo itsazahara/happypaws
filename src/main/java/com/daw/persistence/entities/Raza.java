@@ -36,7 +36,7 @@ public class Raza {
     @Enumerated(EnumType.STRING)
     private Especie especie;
     
-    @Column(nullable = false)
+    @Column
     private String imagen;
 
     @OneToMany(mappedBy = "raza", cascade = CascadeType.ALL, orphanRemoval = true)

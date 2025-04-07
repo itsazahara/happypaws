@@ -1,6 +1,5 @@
 package com.daw.web.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Raza;
 import com.daw.services.RazaService;
-import com.daw.services.dtos.RazaDTO;
-import com.daw.services.mappers.RazaMapper;
 
 @RestController
 @RequestMapping("/razas")
@@ -30,58 +27,45 @@ public class RazaController {
 	private RazaService razaService;
 
 	@GetMapping
-	public ResponseEntity<List<RazaDTO>> razas(){
-		List<Raza> razas = this.razaService.findAll();
-		List<RazaDTO> razasDTO = new ArrayList<>();
-		for(Raza raza : razas) {
-			razasDTO.add(RazaMapper.toDTO(raza, false));
-		}
-		return ResponseEntity.ok(razasDTO);
+	public ResponseEntity<List<Raza>> list(){
+		return ResponseEntity.ok(this.razaService.findAll());
 	}
 
 	@GetMapping("/{idRaza}")
-	public ResponseEntity<RazaDTO> raza(@PathVariable int idRaza) {
+	public ResponseEntity<Raza> findById(@PathVariable int idRaza) {
 		Optional<Raza> raza = this.razaService.findById(idRaza);
 		if(raza.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		return ResponseEntity.ok(RazaMapper.toDTO(raza.get(), false));
+		return ResponseEntity.ok(raza.get());
 	}
 
 	@PostMapping
-    public ResponseEntity<RazaDTO> create(@RequestBody Raza raza) {
-		Raza savedRaza = razaService.create(raza);
-		RazaDTO razaDTO = RazaMapper.toDTO(savedRaza, false);
-        return new ResponseEntity<>(razaDTO, HttpStatus.CREATED);
-    }
+	public ResponseEntity<Raza> create(@RequestBody Raza raza){
+		return new ResponseEntity<Raza>(this.razaService.create(raza), HttpStatus.CREATED);
+	}
 
 	@PutMapping("/{idRaza}")
-    public ResponseEntity<RazaDTO> update(@PathVariable int idRaza, @RequestBody RazaDTO razaDTO) {
-        if (idRaza != razaDTO.getId()) {
-            return ResponseEntity.badRequest().build();
-        }
-        if (!razaService.existsRaza(idRaza)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Raza raza = RazaMapper.toEntity(razaDTO);
-        Raza updatedRaza = razaService.save(raza);
-        RazaDTO responseDTO = RazaMapper.toDTO(updatedRaza, false);
-
-        return ResponseEntity.ok(responseDTO);
-    }
+	public ResponseEntity<Raza> update(@PathVariable int idRaza, @RequestBody Raza raza){
+		if(idRaza != raza.getId()) {
+			return ResponseEntity.badRequest().build();
+		}
+		else if(!this.razaService.existsRaza(idRaza)) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(this.razaService.save(raza));
+	}
 	
 	@DeleteMapping("/{idRaza}")
-    public ResponseEntity<RazaDTO> delete(@PathVariable int idRaza) {
-		RazaDTO razaEliminado = razaService.delete(idRaza);
-        
-        if (razaEliminado != null) {
-            return ResponseEntity.ok(razaEliminado);
-        }
-        
-        return ResponseEntity.notFound().build();
-    }
+	public ResponseEntity<Raza> delete(@PathVariable int idRaza){
+		if(this.razaService.delete(idRaza)) {
+			return ResponseEntity.ok().build();
+		}
+
+		return ResponseEntity.notFound().build();
+	}
 
 	@GetMapping("/buscador")
 	public ResponseEntity<List<Raza>> findByNombre(@RequestParam String nombre) {

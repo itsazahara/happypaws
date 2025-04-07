@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.daw.persistence.entities.Raza;
 import com.daw.persistence.repositories.RazaRepository;
-import com.daw.services.dtos.RazaDTO;
-import com.daw.services.mappers.RazaMapper;
 
 @Service
 public class RazaService {
@@ -37,17 +35,16 @@ public class RazaService {
 		return this.razaRepository.save(raza);
 	}
 
-	public RazaDTO delete(int idRaza) {
-        Optional<Raza> razaOptional = razaRepository.findById(idRaza);
-
-        if (razaOptional.isPresent()) {
-        	Raza raza = razaOptional.get();
-        	razaRepository.delete(raza);
-            return RazaMapper.toDTO(raza, false);
-        }
-
-        return null;
-    }
+	public boolean delete(int idRaza) {
+		boolean result = false;
+		
+		if(this.razaRepository.existsById(idRaza)) {
+			this.razaRepository.deleteById(idRaza);
+			result = true;
+		}
+		
+		return result;
+	}
 
 
 	public List<Raza> getByNombre(String nombre) {
