@@ -2,6 +2,7 @@ package com.daw.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,8 +55,9 @@ public class MascotaService {
         return null;
     }
 
-	public List<Mascota> buscarPorSexo(Sexo sexo) {
-		return mascotaRepository.findBySexo(sexo);
+	public List<MascotaDTO> buscarPorSexo(Sexo sexo) {
+		List<Mascota> mascotas = mascotaRepository.findBySexo(sexo);
+		return mascotas.stream().map(mascota -> MascotaMapper.toDTO(mascota)).collect(Collectors.toList());
 	}
 
 	public List<Mascota> buscarPorEspecie(Especie especie) {

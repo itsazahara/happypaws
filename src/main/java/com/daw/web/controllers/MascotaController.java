@@ -94,9 +94,9 @@ public class MascotaController {
     }
 
 	@GetMapping("/buscarPorSexo")
-	public List<Mascota> buscarPorSexo(@RequestParam Sexo sexo) {
-		return mascotaService.buscarPorSexo(sexo);
-	}
+    public List<MascotaDTO> buscarPorSexo(@RequestParam Sexo sexo) {
+        return mascotaService.buscarPorSexo(sexo);
+    }
 
 	@GetMapping("/buscarPorEspecie")
 	public List<Mascota> buscarPorEspecie(@RequestParam Especie especie) {
