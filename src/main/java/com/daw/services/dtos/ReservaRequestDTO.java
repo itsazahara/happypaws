@@ -10,11 +10,11 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class ReservaRequestDTO {
-	
+
 	private Integer idMascota;
-    private Integer idCliente;
-    private Integer idAdministrador;
-    private Estado estado;
-    private String observaciones;
+	private Integer idCliente;
+	private Integer idAdministrador;
+	private Estado estado;
+	private String observaciones;
 
 }

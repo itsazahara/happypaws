@@ -4,12 +4,10 @@ import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.persistence.entities.enumerados.Tamanio;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor

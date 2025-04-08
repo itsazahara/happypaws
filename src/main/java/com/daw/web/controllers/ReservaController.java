@@ -24,8 +24,6 @@ import com.daw.services.dtos.ReservaDTO;
 import com.daw.services.dtos.ReservaRequestDTO;
 import com.daw.services.mappers.ReservaMapper;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @RestController
 @RequestMapping("/reservas")
 public class ReservaController {
@@ -55,14 +53,14 @@ public class ReservaController {
 
 	@PostMapping
 	public ResponseEntity<Reserva> create(@RequestBody ReservaRequestDTO reservaRequestDTO) {
-        try {
-            Reserva nuevaReserva = reservaService.create(reservaRequestDTO);
-            
-            return new ResponseEntity<>(nuevaReserva, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+		try {
+			Reserva nuevaReserva = reservaService.create(reservaRequestDTO);
+
+			return new ResponseEntity<>(nuevaReserva, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@PutMapping("/{idReserva}")
 	public ResponseEntity<ReservaDTO> update(@PathVariable int idReserva, @RequestBody ReservaDTO reservaDTO) {

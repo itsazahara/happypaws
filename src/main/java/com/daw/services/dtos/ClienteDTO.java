@@ -2,12 +2,10 @@ package com.daw.services.dtos;
 
 import com.daw.persistence.entities.enumerados.TipoVivienda;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
