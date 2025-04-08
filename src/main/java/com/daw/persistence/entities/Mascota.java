@@ -71,9 +71,12 @@ public class Mascota {
     private String historia;
     
     private Boolean disponibilidad = true;
+    
+    @Column(name = "id_raza")
+    private Integer idRaza;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_raza", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_raza", referencedColumnName = "id", insertable = false, updatable = false)
     private Raza raza;
 
 

@@ -31,16 +31,25 @@ public class Reserva {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(name = "id_mascota")
+    private Integer idMascota;
+	
 	@ManyToOne
-	@JoinColumn(name = "id_mascota", nullable = false)
+	@JoinColumn(name = "id_mascota", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
 	private Mascota mascota;
+	
+	@Column(name = "id_cliente")
+    private Integer idCliente;
 
 	@ManyToOne
-	@JoinColumn(name = "id_cliente", nullable = false)
+	@JoinColumn(name = "id_cliente", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
 	private Cliente cliente;
+	
+	@Column(name = "id_administrador")
+    private Integer idAdministrador;
 
 	@ManyToOne
-	@JoinColumn(name = "id_administrador", nullable = false)
+	@JoinColumn(name = "id_administrador", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
 	@JsonIgnore
 	private Administrador administrador;
 

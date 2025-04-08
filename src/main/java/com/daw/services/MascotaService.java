@@ -34,6 +34,7 @@ public class MascotaService {
 	}
 
 	public Mascota create(Mascota mascota) {
+		mascota.getIdRaza();
 		return this.mascotaRepository.save(mascota);
 	}
 

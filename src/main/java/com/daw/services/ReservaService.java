@@ -12,6 +12,7 @@ import com.daw.persistence.entities.enumerados.Estado;
 import com.daw.persistence.repositories.MascotaRepository;
 import com.daw.persistence.repositories.ReservaRepository;
 import com.daw.services.dtos.ReservaDTO;
+import com.daw.services.dtos.ReservaRequestDTO;
 import com.daw.services.mappers.ReservaMapper;
 
 import jakarta.transaction.Transactional;
@@ -37,9 +38,20 @@ public class ReservaService {
 		return this.reservaRepository.findById(idReserva);
 	}
 
-	public Reserva create(Reserva reserva) {
-		return this.reservaRepository.save(reserva);
+	public Reserva create(ReservaRequestDTO dto) {
+	    Reserva reserva = new Reserva();
+
+	    reserva.setIdMascota(dto.getIdMascota());
+	    reserva.setIdCliente(dto.getIdCliente());
+	    reserva.setIdAdministrador(dto.getIdAdministrador());
+
+	    reserva.setEstado(dto.getEstado() != null ? dto.getEstado() : Estado.PENDIENTE);
+	    reserva.setObservaciones(dto.getObservaciones());
+
+	    return reservaRepository.save(reserva);
 	}
+
+
 
 	public Reserva save(Reserva reserva) {
 		return this.reservaRepository.save(reserva);
