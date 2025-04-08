@@ -12,6 +12,7 @@ import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.persistence.repositories.MascotaRepository;
 import com.daw.services.dtos.MascotaDTO;
+import com.daw.services.dtos.MascotaRequestDTO;
 import com.daw.services.mappers.MascotaMapper;
 
 import jakarta.transaction.Transactional;
@@ -34,11 +35,29 @@ public class MascotaService {
 		return this.mascotaRepository.findById(idMascota);
 	}
 
-	public Mascota create(Mascota mascota) {
-		mascota.getIdRaza();
-		return this.mascotaRepository.save(mascota);
-	}
+	public Mascota create(MascotaRequestDTO dto) {
+		Mascota mascota = new Mascota();
 
+		 mascota.setId(dto.getId());
+	        mascota.setNombre(dto.getNombre());
+	        mascota.setSexo(dto.getSexo());
+	        mascota.setEspecie(dto.getEspecie());
+	        mascota.setTamanio(dto.getTamanio());
+	        mascota.setEdad(dto.getEdad());
+	        mascota.setPeso(dto.getPeso());
+	        mascota.setEsterilizado(dto.getEsterilizado());
+	        mascota.setVacunado(dto.getVacunado());
+	        mascota.setDesparasitado(dto.getDesparasitado());
+	        mascota.setPersonalidad(dto.getPersonalidad());
+	        mascota.setImagen(dto.getImagen());
+	        mascota.setCuidadosEspeciales(dto.getCuidadosEspeciales());
+	        mascota.setHistoria(dto.getHistoria());
+	        mascota.setDisponibilidad(dto.getDisponibilidad());
+	        mascota.setIdRaza(dto.getIdRaza());
+
+		return mascotaRepository.save(mascota);
+	}
+	
 	public Mascota save(Mascota mascota) {
 		return this.mascotaRepository.save(mascota);
 	}

@@ -54,12 +54,16 @@ public class MascotaController {
 	}
 
 	@PostMapping
-    public ResponseEntity<MascotaDTO> create(@RequestBody Mascota mascota) {
-		Mascota savedMascota = mascotaService.create(mascota);
-		MascotaDTO mascotaDTO = MascotaMapper.toDTO(savedMascota);
-        return new ResponseEntity<>(mascotaDTO, HttpStatus.CREATED);
-    }
+	public ResponseEntity<Mascota> create(@RequestBody MascotaRequestDTO mascotaRequestDTO) {
+		try {
+			Mascota nuevaMascota = mascotaService.create(mascotaRequestDTO);
 
+			return new ResponseEntity<>(nuevaMascota, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PutMapping("/{idMascota}")
     public ResponseEntity<Mascota> update(@PathVariable Integer idMascota, @RequestBody MascotaRequestDTO mascotaRequestDTO) {
         if (!idMascota.equals(mascotaRequestDTO.getId())) {
