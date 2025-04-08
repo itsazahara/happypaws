@@ -97,9 +97,9 @@ public class ReservaController {
 	}
 
 	@GetMapping("/estado/{estado}")
-	public List<Reserva> getReservasPorEstado(@PathVariable Estado estado) {
-		return reservaService.buscarPorEstado(estado);
-	}
+    public List<ReservaDTO> getReservasPorEstado(@PathVariable Estado estado) {
+        return reservaService.buscarPorEstado(estado);
+    }
 
 	@GetMapping("/ordenarPorFecha")
 	public List<Reserva> getReservasOrdenadas(@RequestParam(defaultValue = "desc") String orden) {
