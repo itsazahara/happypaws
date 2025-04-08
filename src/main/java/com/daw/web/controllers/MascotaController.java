@@ -22,7 +22,9 @@ import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.entities.enumerados.Sexo;
 import com.daw.services.MascotaService;
 import com.daw.services.dtos.MascotaDTO;
+import com.daw.services.dtos.MascotaRequestDTO;
 import com.daw.services.mappers.MascotaMapper;
+import com.daw.services.mappers.MascotaRequestMapper;
 
 @RestController
 @RequestMapping("/mascotas")
@@ -59,19 +61,25 @@ public class MascotaController {
     }
 
 	@PutMapping("/{idMascota}")
-    public ResponseEntity<MascotaDTO> update(@PathVariable int idMascota, @RequestBody MascotaDTO mascotaDTO) {
-        if (idMascota != mascotaDTO.getId()) {
+    public ResponseEntity<Mascota> update(@PathVariable Integer idMascota, @RequestBody MascotaRequestDTO mascotaRequestDTO) {
+        if (!idMascota.equals(mascotaRequestDTO.getId())) {
             return ResponseEntity.badRequest().build();
         }
-        if (!mascotaService.existsMascota(idMascota)) {
+
+        Optional<Mascota> mascotaOptional = mascotaService.findById(idMascota);
+        
+        if (!mascotaOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        Mascota mascota = MascotaMapper.toEntity(mascotaDTO);
-        Mascota updatedMascota = mascotaService.save(mascota);
-        MascotaDTO responseDTO = MascotaMapper.toDTO(updatedMascota);
-
-        return ResponseEntity.ok(responseDTO);
+        try {
+            Mascota mascota = MascotaRequestMapper.toEntity(mascotaRequestDTO);
+            mascota.setId(idMascota);
+            Mascota updatedMascota = mascotaService.save(mascota);
+            return ResponseEntity.ok(updatedMascota);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 	@DeleteMapping("/{idMascota}")
