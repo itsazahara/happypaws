@@ -60,20 +60,24 @@ public class MascotaService {
 		return mascotas.stream().map(mascota -> MascotaMapper.toDTO(mascota)).collect(Collectors.toList());
 	}
 
-	public List<Mascota> buscarPorEspecie(Especie especie) {
-		return mascotaRepository.findByEspecie(especie);
+	public List<MascotaDTO> buscarPorEspecie(Especie especie) {
+		List<Mascota> mascotas = mascotaRepository.findByEspecie(especie);
+		return mascotas.stream().map(mascota -> MascotaMapper.toDTO(mascota)).collect(Collectors.toList());
 	}
 
-	public List<Mascota> buscarPorEsterilizado(Boolean esterilizado) {
-		return mascotaRepository.findByEsterilizado(esterilizado);
+	public List<MascotaDTO> buscarPorEsterilizado(Boolean esterilizado) {
+		List<Mascota> mascotas = mascotaRepository.findByEsterilizado(esterilizado);
+		return mascotas.stream().map(mascota -> MascotaMapper.toDTO(mascota)).collect(Collectors.toList());
 	}
 
-	public List<Mascota> buscarPorVacunado(Boolean vacunado) {
-		return mascotaRepository.findByVacunado(vacunado);
+	public List<MascotaDTO> buscarPorVacunado(Boolean vacunado) {
+		List<Mascota> mascotas = mascotaRepository.findByVacunado(vacunado);
+		return mascotas.stream().map(mascota -> MascotaMapper.toDTO(mascota)).collect(Collectors.toList());
 	}
 
-	public List<Mascota> buscarPorDesparasitado(Boolean desparasitado) {
-		return mascotaRepository.findByDesparasitado(desparasitado);
+	public List<MascotaDTO> buscarPorDesparasitado(Boolean desparasitado) {
+		List<Mascota> mascotas = mascotaRepository.findByDesparasitado(desparasitado);
+		return mascotas.stream().map(mascota -> MascotaMapper.toDTO(mascota)).collect(Collectors.toList());
 	}
 
 	@Transactional
