@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ReservaRequestDTO {
 
+	private Integer id;
 	private Integer idMascota;
 	private Integer idCliente;
 	private Integer idAdministrador;

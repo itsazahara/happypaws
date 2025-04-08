@@ -23,6 +23,7 @@ import com.daw.services.ReservaService;
 import com.daw.services.dtos.ReservaDTO;
 import com.daw.services.dtos.ReservaRequestDTO;
 import com.daw.services.mappers.ReservaMapper;
+import com.daw.services.mappers.ReservaRequestMapper;
 
 @RestController
 @RequestMapping("/reservas")
@@ -61,22 +62,28 @@ public class ReservaController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
 	@PutMapping("/{idReserva}")
-	public ResponseEntity<ReservaDTO> update(@PathVariable int idReserva, @RequestBody ReservaDTO reservaDTO) {
-		if (idReserva != reservaDTO.getId()) {
-			return ResponseEntity.badRequest().build();
-		}
-		if (!reservaService.existsReserva(idReserva)) {
-			return ResponseEntity.notFound().build();
-		}
+    public ResponseEntity<Reserva> update(@PathVariable Integer idReserva, @RequestBody ReservaRequestDTO reservaRequestDTO) {
+        if (!idReserva.equals(reservaRequestDTO.getId())) {
+            return ResponseEntity.badRequest().build();
+        }
 
-		Reserva reserva = ReservaMapper.toEntity(reservaDTO);
-		Reserva updatedReserva = reservaService.save(reserva);
-		ReservaDTO responseDTO = ReservaMapper.toDTO(updatedReserva, false);
+        Optional<Reserva> reservaOptional = reservaService.findById(idReserva);
+        
+        if (!reservaOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
 
-		return ResponseEntity.ok(responseDTO);
-	}
+        try {
+        	Reserva reserva = ReservaRequestMapper.toEntity(reservaRequestDTO);
+        	reserva.setId(idReserva);
+            Reserva updatedReserva = reservaService.save(reserva);
+            return ResponseEntity.ok(updatedReserva);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 	@DeleteMapping("/{idReserva}")
 	public ResponseEntity<ReservaDTO> delete(@PathVariable int idReserva) {
