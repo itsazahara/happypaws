@@ -62,28 +62,29 @@ public class ReservaController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PutMapping("/{idReserva}")
-    public ResponseEntity<Reserva> update(@PathVariable Integer idReserva, @RequestBody ReservaRequestDTO reservaRequestDTO) {
-        if (!idReserva.equals(reservaRequestDTO.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
+	public ResponseEntity<Reserva> update(@PathVariable Integer idReserva,
+			@RequestBody ReservaRequestDTO reservaRequestDTO) {
+		if (!idReserva.equals(reservaRequestDTO.getId())) {
+			return ResponseEntity.badRequest().build();
+		}
 
-        Optional<Reserva> reservaOptional = reservaService.findById(idReserva);
-        
-        if (!reservaOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
+		Optional<Reserva> reservaOptional = reservaService.findById(idReserva);
 
-        try {
-        	Reserva reserva = ReservaRequestMapper.toEntity(reservaRequestDTO);
-        	reserva.setId(idReserva);
-            Reserva updatedReserva = reservaService.save(reserva);
-            return ResponseEntity.ok(updatedReserva);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+		if (!reservaOptional.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		try {
+			Reserva reserva = ReservaRequestMapper.toEntity(reservaRequestDTO);
+			reserva.setId(idReserva);
+			Reserva updatedReserva = reservaService.save(reserva);
+			return ResponseEntity.ok(updatedReserva);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@DeleteMapping("/{idReserva}")
 	public ResponseEntity<ReservaDTO> delete(@PathVariable int idReserva) {
@@ -97,9 +98,9 @@ public class ReservaController {
 	}
 
 	@GetMapping("/estado/{estado}")
-    public List<ReservaDTO> getReservasPorEstado(@PathVariable Estado estado) {
-        return reservaService.buscarPorEstado(estado);
-    }
+	public List<ReservaDTO> getReservasPorEstado(@PathVariable Estado estado) {
+		return reservaService.buscarPorEstado(estado);
+	}
 
 	@GetMapping("/ordenarPorFecha")
 	public List<Reserva> getReservasOrdenadas(@RequestParam(defaultValue = "desc") String orden) {
@@ -111,12 +112,8 @@ public class ReservaController {
 		return reservaService.buscarPorCliente(clienteId);
 	}
 
-	/* FALTA EL TESTING DE ESTE ENDPOINT */
 	@PutMapping("/{id}/estado")
 	public ReservaDTO actualizarEstadoReserva(@PathVariable Integer id, @RequestParam Estado nuevoEstado) {
 		return reservaService.actualizarEstado(id, nuevoEstado);
 	}
-
-	/* FALTA COMPROBAR EL ENDPOINT DE ACTUALIZAR LA DISPONIBILIDAD */
-
 }

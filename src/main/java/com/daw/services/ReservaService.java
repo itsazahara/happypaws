@@ -7,10 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.daw.persistence.entities.Mascota;
 import com.daw.persistence.entities.Reserva;
 import com.daw.persistence.entities.enumerados.Estado;
-import com.daw.persistence.repositories.MascotaRepository;
 import com.daw.persistence.repositories.ReservaRepository;
 import com.daw.services.dtos.ReservaDTO;
 import com.daw.services.dtos.ReservaRequestDTO;
@@ -23,9 +21,6 @@ public class ReservaService {
 
 	@Autowired
 	private ReservaRepository reservaRepository;
-
-	@Autowired
-	private MascotaRepository mascotaRepository;
 
 	public List<Reserva> findAll() {
 		return this.reservaRepository.findAll();
@@ -97,20 +92,6 @@ public class ReservaService {
 		} else {
 			throw new RuntimeException("Reserva no encontrada con ID: " + id);
 		}
-	}
-
-	@Transactional
-	public Reserva crearReserva(Reserva reserva) {
-		Mascota mascota = reserva.getMascota();
-
-		if (!mascota.getDisponibilidad()) {
-			throw new RuntimeException("La mascota ya está reservada");
-		}
-
-		mascota.setDisponibilidad(false);
-		mascotaRepository.save(mascota);
-
-		return reservaRepository.save(reserva);
 	}
 
 }
