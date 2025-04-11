@@ -15,52 +15,52 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteService {
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
-	public List<Cliente> findAll(){
+
+	public List<Cliente> findAll() {
 		return this.clienteRepository.findAll();
 	}
-	
-	public boolean existsCliente(int idCliente){
+
+	public boolean existsCliente(int idCliente) {
 		return this.clienteRepository.existsById(idCliente);
 	}
-	
-	public Optional<Cliente> findById(int idCliente){
+
+	public Optional<Cliente> findById(int idCliente) {
 		return this.clienteRepository.findById(idCliente);
 	}
-	
+
 	public Cliente create(Cliente cliente) {
 		return this.clienteRepository.save(cliente);
 	}
-	
+
 	public Cliente save(Cliente cliente) {
 		return this.clienteRepository.save(cliente);
 	}
-	
+
 	public ClienteDTO delete(int idCliente) {
-        Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
+		Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
 
-        if (clienteOptional.isPresent()) {
-            Cliente cliente = clienteOptional.get();
-            clienteRepository.delete(cliente);
-            return ClienteMapper.toDto(cliente);
-        }
+		if (clienteOptional.isPresent()) {
+			Cliente cliente = clienteOptional.get();
+			clienteRepository.delete(cliente);
+			return ClienteMapper.toDto(cliente);
+		}
 
-        return null;
-    }
-	
+		return null;
+	}
+
 	@Transactional
-    public Cliente actualizarOtrasMascotas(Integer id, Boolean otrasMascotas) {
-        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
-        if (clienteOptional.isPresent()) {
-            Cliente cliente = clienteOptional.get();
-            cliente.setOtrasMascotas(otrasMascotas);
-            return clienteRepository.save(cliente);
-        } else {
-            throw new RuntimeException("Cliente no encontrado con ID: " + id);
-        }
-    }
+	public Cliente actualizarOtrasMascotas(Integer id, Boolean otrasMascotas) {
+		Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+		if (clienteOptional.isPresent()) {
+			Cliente cliente = clienteOptional.get();
+			cliente.setOtrasMascotas(otrasMascotas);
+			return clienteRepository.save(cliente);
+		} else {
+			throw new RuntimeException("Cliente no encontrado con ID: " + id);
+		}
+	}
 
 }

@@ -25,68 +25,67 @@ import com.daw.services.mappers.ClienteMapper;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-	
+
 	@Autowired
 	private ClienteService clienteService;
-	
+
 	@GetMapping
-	public ResponseEntity<List<ClienteDTO>> clientes(){
+	public ResponseEntity<List<ClienteDTO>> clientes() {
 		List<Cliente> clientes = this.clienteService.findAll();
 		List<ClienteDTO> clientesDTO = new ArrayList<>();
-		for(Cliente cliente : clientes) {
+		for (Cliente cliente : clientes) {
 			clientesDTO.add(ClienteMapper.toDto(cliente));
 		}
 		return ResponseEntity.ok(clientesDTO);
 	}
-	
+
 	@GetMapping("/{idCliente}")
 	public ResponseEntity<ClienteDTO> cliente(@PathVariable int idCliente) {
 		Optional<Cliente> cliente = this.clienteService.findById(idCliente);
-		if(cliente.isEmpty()) {
+		if (cliente.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		
+
 		return ResponseEntity.ok(ClienteMapper.toDto(cliente.get()));
 	}
-	
+
 	@PostMapping
-    public ResponseEntity<ClienteDTO> create(@RequestBody Cliente cliente) {
-        Cliente savedCliente = clienteService.create(cliente);
-        ClienteDTO clienteDTO = ClienteMapper.toDto(savedCliente);
-        return new ResponseEntity<>(clienteDTO, HttpStatus.CREATED);
-    }
-	
+	public ResponseEntity<ClienteDTO> create(@RequestBody Cliente cliente) {
+		Cliente savedCliente = clienteService.create(cliente);
+		ClienteDTO clienteDTO = ClienteMapper.toDto(savedCliente);
+		return new ResponseEntity<>(clienteDTO, HttpStatus.CREATED);
+	}
+
 	@PutMapping("/{idCliente}")
-    public ResponseEntity<ClienteDTO> update(@PathVariable int idCliente, @RequestBody ClienteDTO clienteDTO) {
-        if (idCliente != clienteDTO.getId()) {
-            return ResponseEntity.badRequest().build();
-        }
-        if (!clienteService.existsCliente(idCliente)) {
-            return ResponseEntity.notFound().build();
-        }
+	public ResponseEntity<ClienteDTO> update(@PathVariable int idCliente, @RequestBody ClienteDTO clienteDTO) {
+		if (idCliente != clienteDTO.getId()) {
+			return ResponseEntity.badRequest().build();
+		}
+		if (!clienteService.existsCliente(idCliente)) {
+			return ResponseEntity.notFound().build();
+		}
 
-        Cliente cliente = ClienteMapper.toEntity(clienteDTO);
-        Cliente updatedCliente = clienteService.save(cliente);
-        ClienteDTO responseDTO = ClienteMapper.toDto(updatedCliente);
+		Cliente cliente = ClienteMapper.toEntity(clienteDTO);
+		Cliente updatedCliente = clienteService.save(cliente);
+		ClienteDTO responseDTO = ClienteMapper.toDto(updatedCliente);
 
-        return ResponseEntity.ok(responseDTO);
-    }
-	
+		return ResponseEntity.ok(responseDTO);
+	}
+
 	@DeleteMapping("/{idCliente}")
-    public ResponseEntity<ClienteDTO> delete(@PathVariable int idCliente) {
-        ClienteDTO clienteEliminado = clienteService.delete(idCliente);
-        
-        if (clienteEliminado != null) {
-            return ResponseEntity.ok(clienteEliminado);
-        }
-        
-        return ResponseEntity.notFound().build();
-    }
-	
-	/* FALTA COMPROBAR ESTE ENDPOINT */
+	public ResponseEntity<ClienteDTO> delete(@PathVariable int idCliente) {
+		ClienteDTO clienteEliminado = clienteService.delete(idCliente);
+
+		if (clienteEliminado != null) {
+			return ResponseEntity.ok(clienteEliminado);
+		}
+
+		return ResponseEntity.notFound().build();
+	}
+
 	@PutMapping("/{id}/otras-mascotas")
-    public Cliente actualizarOtrasMascotas(@PathVariable Integer id, @RequestParam Boolean otrasMascotas) {
-        return clienteService.actualizarOtrasMascotas(id, otrasMascotas);
-    }
+	public Cliente actualizarOtrasMascotas(@PathVariable Integer id, @RequestParam Boolean otrasMascotas) {
+		return clienteService.actualizarOtrasMascotas(id, otrasMascotas);
+	}
 
 }
