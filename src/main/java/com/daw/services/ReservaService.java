@@ -86,12 +86,14 @@ public class ReservaService {
 	}
 
 	@Transactional
-	public Reserva actualizarEstado(Integer id, Estado nuevoEstado) {
+	public ReservaDTO actualizarEstado(Integer id, Estado nuevoEstado) {
 		Optional<Reserva> reservaOptional = reservaRepository.findById(id);
 		if (reservaOptional.isPresent()) {
 			Reserva reserva = reservaOptional.get();
 			reserva.setEstado(nuevoEstado);
-			return reservaRepository.save(reserva);
+			Reserva actualizada = reservaRepository.save(reserva);
+
+			return ReservaMapper.toDTO(actualizada, true);
 		} else {
 			throw new RuntimeException("Reserva no encontrada con ID: " + id);
 		}
