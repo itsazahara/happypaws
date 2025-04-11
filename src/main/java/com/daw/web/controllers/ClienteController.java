@@ -88,4 +88,9 @@ public class ClienteController {
 		return clienteService.actualizarOtrasMascotas(id, otrasMascotas);
 	}
 
+	@PutMapping("/{id}/experiencia-mascotas")
+	public Cliente actualizarExperienciaMascotas(@PathVariable Integer id, @RequestParam Boolean experienciaMascotas) {
+		return clienteService.actualizarExperienciaMascotas(id, experienciaMascotas);
+	}
+
 }

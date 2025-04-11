@@ -62,5 +62,17 @@ public class ClienteService {
 			throw new RuntimeException("Cliente no encontrado con ID: " + id);
 		}
 	}
+	
+	@Transactional
+	public Cliente actualizarExperienciaMascotas(Integer id, Boolean experienciaMascotas) {
+		Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+		if (clienteOptional.isPresent()) {
+			Cliente cliente = clienteOptional.get();
+			cliente.setExperienciaMascotas(experienciaMascotas);
+			return clienteRepository.save(cliente);
+		} else {
+			throw new RuntimeException("Cliente no encontrado con ID: " + id);
+		}
+	}
 
 }
