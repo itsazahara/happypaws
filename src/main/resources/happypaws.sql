@@ -235,16 +235,28 @@ INSERT INTO raza (nombre, especie, imagen) VALUES
 ('Somalí', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/2021-02/CAT%20HERO_0025_Somali.jpg?itok=u-_NibBO'),
 ('Tiffanie', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/breed_library/cat_tiffanie.jpg?itok=LDAn31K6'),
 ('Tonquinés', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/2021-02/CAT%20HERO_0027_Tonkinese.jpg?itok=G4nWTwvW'),
-('Van turco', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/breed_library/cat_turkish_van.jpg?itok=3G0X3-CX');
+('Van turco', 'Gato', 'https://www.purina.es/sites/default/files/styles/nppe_breed_selector_500/public/breed_library/cat_turkish_van.jpg?itok=3G0X3-CX'),
+('Raza de prueba', 'Perro', 'imagen.png');
 
 INSERT INTO administrador (nombre, apellidos, usuario, contrasenia, email, telefono, imagen) VALUES  
-('Azahara', 'Romero Schulte', 'aromsch', '1234', 'aazaharatkd14@gmail.com', '619046439', 'https://avatars.githubusercontent.com/u/159541934?v=4');
+('Azahara', 'Romero Schulte', 'aromsch', '1234', 'aazaharatkd14@gmail.com', '619046439', 'https://avatars.githubusercontent.com/u/159541934?v=4'),
+('Aitana', 'Romero Schulte', 'miniaromsch', '4321', 'miniaromsch@gmail.com', '123456789', 'imagen.png'),
+('María', 'González', 'mariagonz', 'securepass456', 'maria.gonzalez@email.com', '987654321', 'imagen2.jpg'),
+('Carlos', 'López', 'carlosl', 'password789', 'carlos.lopez@email.com', '555123456', 'imagen3.jpg'),
+('Ana', 'Martínez', 'anamart', 'mypassword101', 'ana.martinez@email.com', '444987654', 'imagen4.jpg'),
+('Luis', 'Hernández', 'luish', 'pass1234', 'luis.hernandez@email.com', '666234567', 'imagen5.jpg'),
+('Administrador', 'De Prueba', 'adminpru', 'contri', 'prueba@gmail.com', '741852963', 'imagen_prueba.jpg');
 
 INSERT INTO cliente (nombre, apellidos, usuario, contrasenia, email, direccion, edad, telefono, ocupacion_laboral, tipo_vivienda, otras_mascotas, experiencia_mascotas, observaciones, imagen) VALUES 
-('Juan', 'Pérez Gómez', 'juanpg', 'segura123', 'juan.perez@example.com', 'Calle Falsa 123', 30, '123456789', 'Ingeniero', 'Casa', TRUE, TRUE, 'Tiene experiencia con perros y gatos. Busca adoptar un cachorro.', 'imagen_perfil_juan.jpg');
+('Juan', 'Pérez Gómez', 'juanpg', 'segura123', 'juan.perez@example.com', 'Calle Falsa 123', 30, '123456789', 'Ingeniero', 'Casa', TRUE, TRUE, 'Tiene experiencia con perros y gatos. Busca adoptar un cachorro.', 'imagen_perfil_juan.jpg'),
+('Cliente', 'De Prueba', 'userprueba', 'contripueb', 'userprueba@gmail.com', 'Calle Cualquiera 24', 45, '963258741', 'Cocinero', 'Piso', FALSE, FALSE, 'Necesito companía de un fiel companiero.', 'imagen_user.png');
 
 INSERT INTO mascota (nombre, sexo, especie, tamanio, edad, peso, esterilizado, vacunado, desparasitado, personalidad, imagen, cuidados_especiales, historia, disponibilidad, id_raza) VALUES 
-('Luna', 'Hembra', 'Perro', 'Mediano', 3, 12.50, TRUE, TRUE, TRUE, 'Juguetona, amigable, le encanta correr en el parque.', 'imagen_luna.jpg', 'Necesita comida especial debido a una alergia.', 'Rescatada de la calle en condiciones difíciles, ahora busca un hogar amoroso.', TRUE, 422);
+('Luna', 'Hembra', 'Perro', 'Mediano', 3, 12.50, TRUE, TRUE, TRUE, 'Juguetona, amigable, le encanta correr en el parque.', 'imagen_luna.jpg', 'Necesita comida especial debido a una alergia.', 'Rescatada de la calle en condiciones difíciles, ahora busca un hogar amoroso.', TRUE, 237),
+('Juno', 'Hembra', 'Gato', 'Pequeño', 1, 5.50, TRUE, TRUE, TRUE, 'Le encanta dormir.', 'imagen_juno.jpg', 'Necesita una pastilla diaria.', 'Rescatada de la calle en condiciones difíciles, ahora busca un hogar amoroso.', TRUE, 237),
+('Carisma', 'Hembra', 'Perro', 'Grande', 7, 30.00, FALSE, TRUE, TRUE, 'Es muy protectora.', 'imagen_carisma.jpg', 'Ninguno.', 'Criada pero por temas personales la familia anterior no podía tenerla.', TRUE, 237);
 
 INSERT INTO reserva (id_mascota, id_cliente, id_administrador, estado, observaciones) VALUES 
-(3, 1, 1, 'Pendiente', 'El cliente ha mostrado interés en adoptar a la mascota.');
+(7, 1, 1, 'Pendiente', 'El cliente ha mostrado interés en adoptar a la mascota.'),
+(7, 1, 1, 'Pendiente', 'Es urgente.'),
+(7, 1, 1, 'Pendiente', 'Esta reserva es de prueba.');
