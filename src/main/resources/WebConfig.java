@@ -1,23 +1,25 @@
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @ComponentScan
 @Configuration
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer{
 	
 	 @Bean
-	  public WebMvcConfigurer corsConfigurer() {
-	    return new WebMvcConfigurer() {
-	      @Override
-	      public void addCorsMappings(CorsRegistry registry) {
-	          registry.addMapping("/**") // Aplica a todas las rutas
-	                  .allowedOrigins("http://localhost:4200") // Permite solicitudes desde Angular
-	                  .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
-	                  .allowedHeaders("*") // Permite cualquier cabecera
-	                  .allowCredentials(true); // Permite enviar cookies (si es necesario)
-	      }
-	    };
+	  public CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration config = new CorsConfiguration();
+	    config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+	    config.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE"));
+	    config.setAllowedHeaders(Arrays.asList("*"));
+	    
+	    UrlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", config);
+	    retorun source;
 	  }
 
 }
