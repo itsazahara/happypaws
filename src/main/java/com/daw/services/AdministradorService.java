@@ -48,5 +48,13 @@ public class AdministradorService {
 
         return null;
     }
+	
+	public Optional<Administrador> findByEmail(String email) {
+	    return administradorRepository.findByEmail(email);
+	}
+	
+	public Optional<Administrador> findByUsuario(String usuario){
+		return administradorRepository.findByUsuario(usuario);
+	}
 
 }
