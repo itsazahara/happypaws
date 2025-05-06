@@ -94,5 +94,30 @@ public class ClienteController {
 	public Cliente actualizarExperienciaMascotas(@PathVariable Integer id, @RequestParam Boolean experienciaMascotas) {
 		return clienteService.actualizarExperienciaMascotas(id, experienciaMascotas);
 	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Cliente loginRequest) {
+	    String email = loginRequest.getEmail();
+	    String contrasenia = loginRequest.getContrasenia();
+	    String usuario = loginRequest.getUsuario();
+
+	    Optional<Cliente> cliente = Optional.empty();
+
+	    // Intentar encontrar por email si se proporciona
+	    if (email != null && !email.isEmpty()) {
+	        cliente = clienteService.findByEmail(email);
+	    }
+
+	    // Si no se encuentra por email, intentar con el nombre de usuario
+	    if ((!cliente.isPresent()) && usuario != null && !usuario.isEmpty()) {
+	        cliente = clienteService.findByUsuario(usuario);
+	    }
+
+	    if (cliente.isPresent() && cliente.get().getContrasenia().equals(contrasenia)) {
+	        return ResponseEntity.ok(ClienteMapper.toDto(cliente.get()));
+	    }
+
+	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+	}
 
 }

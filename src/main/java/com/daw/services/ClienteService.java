@@ -74,5 +74,13 @@ public class ClienteService {
 			throw new RuntimeException("Cliente no encontrado con ID: " + id);
 		}
 	}
+	
+	public Optional<Cliente> findByEmail(String email) {
+	    return clienteRepository.findByEmail(email);
+	}
+	
+	public Optional<Cliente> findByUsuario(String usuario){
+		return clienteRepository.findByUsuario(usuario);
+	}
 
 }
