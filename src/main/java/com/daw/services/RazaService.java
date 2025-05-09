@@ -15,7 +15,7 @@ public class RazaService {
 	@Autowired
 	private RazaRepository razaRepository;
 
-	public List<Raza> findAll(){
+	public List<Raza> findAll() {
 		return this.razaRepository.findAll();
 	}
 
@@ -37,15 +37,14 @@ public class RazaService {
 
 	public boolean delete(int idRaza) {
 		boolean result = false;
-		
-		if(this.razaRepository.existsById(idRaza)) {
+
+		if (this.razaRepository.existsById(idRaza)) {
 			this.razaRepository.deleteById(idRaza);
 			result = true;
 		}
-		
+
 		return result;
 	}
-
 
 	public List<Raza> getByNombre(String nombre) {
 		return this.razaRepository.findByNombreStartingWithIgnoreCase(nombre);
