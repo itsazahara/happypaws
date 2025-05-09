@@ -38,41 +38,41 @@ public class MascotaService {
 	public Mascota create(MascotaRequestDTO dto) {
 		Mascota mascota = new Mascota();
 
-		 mascota.setId(dto.getId());
-	        mascota.setNombre(dto.getNombre());
-	        mascota.setSexo(dto.getSexo());
-	        mascota.setEspecie(dto.getEspecie());
-	        mascota.setTamanio(dto.getTamanio());
-	        mascota.setEdad(dto.getEdad());
-	        mascota.setPeso(dto.getPeso());
-	        mascota.setEsterilizado(dto.getEsterilizado());
-	        mascota.setVacunado(dto.getVacunado());
-	        mascota.setDesparasitado(dto.getDesparasitado());
-	        mascota.setPersonalidad(dto.getPersonalidad());
-	        mascota.setImagen(dto.getImagen());
-	        mascota.setCuidadosEspeciales(dto.getCuidadosEspeciales());
-	        mascota.setHistoria(dto.getHistoria());
-	        mascota.setDisponibilidad(dto.getDisponibilidad());
-	        mascota.setIdRaza(dto.getIdRaza());
+		mascota.setId(dto.getId());
+		mascota.setNombre(dto.getNombre());
+		mascota.setSexo(dto.getSexo());
+		mascota.setEspecie(dto.getEspecie());
+		mascota.setTamanio(dto.getTamanio());
+		mascota.setEdad(dto.getEdad());
+		mascota.setPeso(dto.getPeso());
+		mascota.setEsterilizado(dto.getEsterilizado());
+		mascota.setVacunado(dto.getVacunado());
+		mascota.setDesparasitado(dto.getDesparasitado());
+		mascota.setPersonalidad(dto.getPersonalidad());
+		mascota.setImagen(dto.getImagen());
+		mascota.setCuidadosEspeciales(dto.getCuidadosEspeciales());
+		mascota.setHistoria(dto.getHistoria());
+		mascota.setDisponibilidad(dto.getDisponibilidad());
+		mascota.setIdRaza(dto.getIdRaza());
 
 		return mascotaRepository.save(mascota);
 	}
-	
+
 	public Mascota save(Mascota mascota) {
 		return this.mascotaRepository.save(mascota);
 	}
 
 	public MascotaDTO delete(int idMascota) {
-        Optional<Mascota> mascotaOptional = mascotaRepository.findById(idMascota);
+		Optional<Mascota> mascotaOptional = mascotaRepository.findById(idMascota);
 
-        if (mascotaOptional.isPresent()) {
-        	Mascota mascota = mascotaOptional.get();
-        	mascotaRepository.delete(mascota);
-            return MascotaMapper.toDTO(mascota);
-        }
+		if (mascotaOptional.isPresent()) {
+			Mascota mascota = mascotaOptional.get();
+			mascotaRepository.delete(mascota);
+			return MascotaMapper.toDTO(mascota);
+		}
 
-        return null;
-    }
+		return null;
+	}
 
 	public List<MascotaDTO> buscarPorSexo(Sexo sexo) {
 		List<Mascota> mascotas = mascotaRepository.findBySexo(sexo);
@@ -133,6 +133,10 @@ public class MascotaService {
 		} else {
 			throw new RuntimeException("Mascota no encontrada con ID: " + id);
 		}
+	}
+
+	public List<Mascota> getByRazaId(int idRaza) {
+		return this.mascotaRepository.findByRazaId(idRaza);
 	}
 
 }

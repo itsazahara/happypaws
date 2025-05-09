@@ -36,10 +36,10 @@ public class MascotaController {
 	private MascotaService mascotaService;
 
 	@GetMapping
-	public ResponseEntity<List<MascotaDTO>> mascotas(){
+	public ResponseEntity<List<MascotaDTO>> mascotas() {
 		List<Mascota> mascotas = this.mascotaService.findAll();
 		List<MascotaDTO> mascotasDTO = new ArrayList<>();
-		for(Mascota mascota : mascotas) {
+		for (Mascota mascota : mascotas) {
 			mascotasDTO.add(MascotaMapper.toDTO(mascota));
 		}
 		return ResponseEntity.ok(mascotasDTO);
@@ -48,10 +48,10 @@ public class MascotaController {
 	@GetMapping("/{idMascota}")
 	public ResponseEntity<MascotaDTO> mascota(@PathVariable int idMascota) {
 		Optional<Mascota> mascota = this.mascotaService.findById(idMascota);
-		if(mascota.isEmpty()) {
+		if (mascota.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		
+
 		return ResponseEntity.ok(MascotaMapper.toDTO(mascota.get()));
 	}
 
@@ -65,44 +65,45 @@ public class MascotaController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PutMapping("/{idMascota}")
-    public ResponseEntity<Mascota> update(@PathVariable Integer idMascota, @RequestBody MascotaRequestDTO mascotaRequestDTO) {
-        if (!idMascota.equals(mascotaRequestDTO.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
+	public ResponseEntity<Mascota> update(@PathVariable Integer idMascota,
+			@RequestBody MascotaRequestDTO mascotaRequestDTO) {
+		if (!idMascota.equals(mascotaRequestDTO.getId())) {
+			return ResponseEntity.badRequest().build();
+		}
 
-        Optional<Mascota> mascotaOptional = mascotaService.findById(idMascota);
-        
-        if (!mascotaOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
+		Optional<Mascota> mascotaOptional = mascotaService.findById(idMascota);
 
-        try {
-            Mascota mascota = MascotaRequestMapper.toEntity(mascotaRequestDTO);
-            mascota.setId(idMascota);
-            Mascota updatedMascota = mascotaService.save(mascota);
-            return ResponseEntity.ok(updatedMascota);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+		if (!mascotaOptional.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		try {
+			Mascota mascota = MascotaRequestMapper.toEntity(mascotaRequestDTO);
+			mascota.setId(idMascota);
+			Mascota updatedMascota = mascotaService.save(mascota);
+			return ResponseEntity.ok(updatedMascota);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@DeleteMapping("/{idMascota}")
-    public ResponseEntity<MascotaDTO> delete(@PathVariable int idMascota) {
+	public ResponseEntity<MascotaDTO> delete(@PathVariable int idMascota) {
 		MascotaDTO mascotaEliminado = mascotaService.delete(idMascota);
-        
-        if (mascotaEliminado != null) {
-            return ResponseEntity.ok(mascotaEliminado);
-        }
-        
-        return ResponseEntity.notFound().build();
-    }
+
+		if (mascotaEliminado != null) {
+			return ResponseEntity.ok(mascotaEliminado);
+		}
+
+		return ResponseEntity.notFound().build();
+	}
 
 	@GetMapping("/buscarPorSexo")
-    public List<MascotaDTO> buscarPorSexo(@RequestParam Sexo sexo) {
-        return mascotaService.buscarPorSexo(sexo);
-    }
+	public List<MascotaDTO> buscarPorSexo(@RequestParam Sexo sexo) {
+		return mascotaService.buscarPorSexo(sexo);
+	}
 
 	@GetMapping("/buscarPorEspecie")
 	public List<MascotaDTO> buscarPorEspecie(@RequestParam Especie especie) {
@@ -124,22 +125,24 @@ public class MascotaController {
 		return mascotaService.buscarPorDesparasitado(estado);
 	}
 
-	/* FALTA LA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/esterilizado")
 	public Mascota actualizarEsterilizado(@PathVariable Integer id, @RequestParam Boolean esterilizado) {
 		return mascotaService.actualizarEsterilizado(id, esterilizado);
 	}
 
-	/* FALTA LA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/vacunado")
 	public Mascota actualizarVacunacion(@PathVariable Integer id, @RequestParam Boolean vacunado) {
 		return mascotaService.actualizarVacunacion(id, vacunado);
 	}
 
-	/* FALTA LA COMPROBAR ESTE ENDPOINT */
 	@PutMapping("/{id}/desparasitado")
 	public Mascota actualizarDesparasitado(@PathVariable Integer id, @RequestParam Boolean desparasitado) {
 		return mascotaService.actualizarDesparasitado(id, desparasitado);
+	}
+
+	@GetMapping("/raza/{idRaza}")
+	public List<Mascota> getByRaza(@PathVariable int idRaza) {
+		return mascotaService.getByRazaId(idRaza);
 	}
 
 }
