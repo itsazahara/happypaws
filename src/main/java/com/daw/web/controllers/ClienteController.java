@@ -119,5 +119,10 @@ public class ClienteController {
 
 	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
 	}
+	
+	@GetMapping("/holaSeguro")
+	public String sayHelloSeguro() {
+		return "Estoy diciendo hola seguro";
+	}
 
 }
