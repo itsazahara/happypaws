@@ -124,5 +124,15 @@ public class ClienteController {
 	public String sayHelloSeguro() {
 		return "Estoy diciendo hola seguro";
 	}
+	
+	@GetMapping("/email/{email}")
+	public ResponseEntity<ClienteDTO> getClienteByEmail(@PathVariable String email) {
+	    Optional<Cliente> cliente = clienteService.findByEmail(email);
+	    if (cliente.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+	    return ResponseEntity.ok(ClienteMapper.toDto(cliente.get()));
+	}
+
 
 }

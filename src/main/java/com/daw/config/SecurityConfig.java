@@ -1,5 +1,4 @@
 package com.daw.config;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -26,28 +25,23 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-	    httpSecurity
-	    .cors(cors -> cors.configurationSource(request -> new org.springframework.web.cors.CorsConfiguration().applyPermitDefaultValues()))
-	        .csrf(csrf -> csrf.disable())
-	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers(publicEndpoints()).permitAll()
-	            .requestMatchers("/api/**").permitAll()
-	            .requestMatchers("/razas/**").permitAll()
-	            .requestMatchers("/reservas/**").permitAll()
-	            .requestMatchers("/mascotas/**").permitAll()
-	            .requestMatchers("/auth/authenticate", "/auth/register").permitAll()
-	            .requestMatchers("/auth/authenticateAdmin", "/auth/registerAdmin").permitAll()
-	            .requestMatchers("/administradores/holaSeguro").hasRole("ADMINISTRADOR")
-	            .requestMatchers("/clientes/holaSeguro").hasRole("USUARIO")
-	            .anyRequest().authenticated()
-	        )
-	        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	        .authenticationProvider(authenticationProvider)
-	        .addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity
+				.cors(cors -> cors.configurationSource(request -> new org.springframework.web.cors.CorsConfiguration().applyPermitDefaultValues()))
+				.csrf(csrf -> csrf.disable())
+				.authorizeHttpRequests(auth -> auth.requestMatchers(publicEndpoints()).permitAll()
+						.requestMatchers("/api/**").permitAll().requestMatchers("/razas/**").permitAll()
+						.requestMatchers("/reservas/**").permitAll().requestMatchers("/mascotas/**").permitAll()
+						.requestMatchers("/clientes/**").permitAll().requestMatchers("/administradores/**").permitAll()
+						.requestMatchers("/auth/authenticate", "/auth/register").permitAll()
+						.requestMatchers("/auth/authenticateAdmin", "/auth/registerAdmin").permitAll()
+						.requestMatchers("/administradores/holaSeguro").hasRole("ADMINISTRADOR")
+						.requestMatchers("/clientes/holaSeguro").hasRole("USUARIO").anyRequest().authenticated())
+				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authenticationProvider(authenticationProvider)
+				.addFilterBefore(jwtFiltro, UsernamePasswordAuthenticationFilter.class);
 
-	    return httpSecurity.build();
+		return httpSecurity.build();
 	}
-
 
 	private RequestMatcher publicEndpoints() {
 		return new OrRequestMatcher(new AntPathRequestMatcher("/auth/**"));
