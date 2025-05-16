@@ -6,8 +6,10 @@ import com.daw.services.dtos.ClienteDTO;
 public class ClienteMapper {
 
 	public static ClienteDTO toDto(Cliente cliente) {
+		if (cliente == null) {
+	        return null;
+	    }
 		ClienteDTO dto = new ClienteDTO();
-
 		dto.setId(cliente.getId());
 		dto.setNombre(cliente.getNombre());
 		dto.setApellidos(cliente.getApellidos());

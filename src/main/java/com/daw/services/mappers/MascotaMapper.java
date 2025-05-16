@@ -7,6 +7,9 @@ import com.daw.services.dtos.MascotaDTO;
 public class MascotaMapper {
 	
 	public static MascotaDTO toDTO(Mascota mascota) {
+		if (mascota == null) {
+	        return null;
+	    }
         MascotaDTO dto = new MascotaDTO();
         dto.setId(mascota.getId());
         dto.setNombre(mascota.getNombre());

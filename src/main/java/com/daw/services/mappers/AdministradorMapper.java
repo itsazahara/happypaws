@@ -6,8 +6,10 @@ import com.daw.services.dtos.AdministradorDTO;
 public class AdministradorMapper {
 	
 	public static AdministradorDTO toDto(Administrador administrador) {
+		if (administrador == null) {
+	        return null;
+	    }
 		AdministradorDTO dto = new AdministradorDTO();
-
 		dto.setId(administrador.getId());
 		dto.setNombre(administrador.getNombre());
 		dto.setApellidos(administrador.getApellidos());

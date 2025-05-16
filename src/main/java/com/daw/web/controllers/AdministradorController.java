@@ -18,12 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Administrador;
-import com.daw.persistence.entities.Cliente;
 import com.daw.services.AdministradorService;
 import com.daw.services.dtos.AdministradorDTO;
-import com.daw.services.dtos.ClienteDTO;
 import com.daw.services.mappers.AdministradorMapper;
-import com.daw.services.mappers.ClienteMapper;
 
 @RestController
 @RequestMapping("/administradores")
