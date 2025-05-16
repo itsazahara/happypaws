@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Administrador;
+import com.daw.persistence.entities.Cliente;
 import com.daw.services.AdministradorService;
 import com.daw.services.dtos.AdministradorDTO;
+import com.daw.services.dtos.ClienteDTO;
 import com.daw.services.mappers.AdministradorMapper;
+import com.daw.services.mappers.ClienteMapper;
 
 @RestController
 @RequestMapping("/administradores")
@@ -84,33 +87,42 @@ public class AdministradorController {
 
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Administrador loginRequest) {
-	    String email = loginRequest.getEmail();
-	    String contrasenia = loginRequest.getContrasenia();
-	    String usuario = loginRequest.getUsuario();
+		String email = loginRequest.getEmail();
+		String contrasenia = loginRequest.getContrasenia();
+		String usuario = loginRequest.getUsuario();
 
-	    Optional<Administrador> administrador = Optional.empty();
+		Optional<Administrador> administrador = Optional.empty();
 
-	    if (email != null && !email.isEmpty()) {
-	        administrador = administradorService.findByEmail(email);
-	    }
+		if (email != null && !email.isEmpty()) {
+			administrador = administradorService.findByEmail(email);
+		}
 
-	    if ((!administrador.isPresent()) && usuario != null && !usuario.isEmpty()) {
-	        administrador = administradorService.findByUsuario(usuario);
-	    }
+		if ((!administrador.isPresent()) && usuario != null && !usuario.isEmpty()) {
+			administrador = administradorService.findByUsuario(usuario);
+		}
 
-	    if (administrador.isPresent() && administrador.get().getContrasenia().equals(contrasenia)) {
-	        return ResponseEntity.ok(AdministradorMapper.toDto(administrador.get()));
-	    }
+		if (administrador.isPresent() && administrador.get().getContrasenia().equals(contrasenia)) {
+			return ResponseEntity.ok(AdministradorMapper.toDto(administrador.get()));
+		}
 
-	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
 	}
-	
+
 	@GetMapping("/holaSeguro")
 	public String sayHelloSeguro() {
 		return "Estoy diciendo hola seguro";
+	}
+
+	@GetMapping("/email/{email}")
+	public ResponseEntity<AdministradorDTO> getAdministradorByEmail(@PathVariable String email) {
+		Optional<Administrador> admin = administradorService.findByEmail(email);
+		if (admin.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(AdministradorMapper.toDto(admin.get()));
 	}
 
 }
