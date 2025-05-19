@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Raza;
+import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.services.RazaService;
 
 @RestController
@@ -72,6 +73,11 @@ public class RazaController {
 	@GetMapping("/buscador")
 	public ResponseEntity<List<Raza>> findByNombre(@RequestParam String nombre) {
 		return ResponseEntity.ok(this.razaService.getByNombre(nombre));
+	}
+	
+	@GetMapping("/buscarPorEspecie")
+	public List<Raza> findByEspecie(@RequestParam Especie especie) {
+		return razaService.getByEspecie(especie);
 	}
 
 }

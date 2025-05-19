@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.daw.persistence.entities.Raza;
+import com.daw.persistence.entities.enumerados.Especie;
 import com.daw.persistence.repositories.RazaRepository;
 
 @Service
@@ -48,6 +49,10 @@ public class RazaService {
 
 	public List<Raza> getByNombre(String nombre) {
 		return this.razaRepository.findByNombreStartingWithIgnoreCase(nombre);
+	}
+	
+	public List<Raza> getByEspecie(Especie especie) {
+		return this.razaRepository.findByEspecie(especie);
 	}
 
 }
