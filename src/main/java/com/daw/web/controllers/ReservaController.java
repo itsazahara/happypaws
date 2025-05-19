@@ -118,4 +118,5 @@ public class ReservaController {
 	public ReservaDTO actualizarEstadoReserva(@PathVariable Integer id, @RequestParam Estado nuevoEstado) {
 		return reservaService.actualizarEstado(id, nuevoEstado);
 	}
+
 }
