@@ -60,19 +60,26 @@ public class ClienteController {
 
 	@PutMapping("/{idCliente}")
 	public ResponseEntity<ClienteDTO> update(@PathVariable int idCliente, @RequestBody ClienteDTO clienteDTO) {
-		if (idCliente != clienteDTO.getId()) {
-			return ResponseEntity.badRequest().build();
-		}
-		if (!clienteService.existsCliente(idCliente)) {
-			return ResponseEntity.notFound().build();
-		}
+	    if (idCliente != clienteDTO.getId()) {
+	        return ResponseEntity.badRequest().build();
+	    }
 
-		Cliente cliente = ClienteMapper.toEntity(clienteDTO);
-		Cliente updatedCliente = clienteService.save(cliente);
-		ClienteDTO responseDTO = ClienteMapper.toDto(updatedCliente);
+	    Optional<Cliente> clienteExistenteOpt = clienteService.findById(idCliente);
+	    if (clienteExistenteOpt.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
 
-		return ResponseEntity.ok(responseDTO);
+	    Cliente clienteExistente = clienteExistenteOpt.get();
+
+	    // Solo actualiza los campos del DTO, sin perder password, roles, etc.
+	    ClienteMapper.updateEntityFromDto(clienteDTO, clienteExistente);
+
+	    Cliente actualizado = clienteService.save(clienteExistente);
+	    ClienteDTO responseDTO = ClienteMapper.toDto(actualizado);
+
+	    return ResponseEntity.ok(responseDTO);
 	}
+
 
 	@DeleteMapping("/{idCliente}")
 	public ResponseEntity<ClienteDTO> delete(@PathVariable int idCliente) {

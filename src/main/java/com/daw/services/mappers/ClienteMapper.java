@@ -7,8 +7,8 @@ public class ClienteMapper {
 
 	public static ClienteDTO toDto(Cliente cliente) {
 		if (cliente == null) {
-	        return null;
-	    }
+			return null;
+		}
 		ClienteDTO dto = new ClienteDTO();
 		dto.setId(cliente.getId());
 		dto.setNombre(cliente.getNombre());
@@ -37,7 +37,7 @@ public class ClienteMapper {
 		c.setApellidos(dto.getApellidos());
 		c.setUsuario(dto.getUsuario());
 		c.setTelefono(dto.getTelefono());
-		c.setEmail(dto.getTelefono());
+		c.setEmail(dto.getEmail());
 		c.setDireccion(dto.getDireccion());
 		c.setEdad(dto.getEdad());
 		c.setOcupacionLaboral(dto.getOcupacionLaboral());
@@ -47,6 +47,26 @@ public class ClienteMapper {
 		c.setImagen(dto.getImagen());
 
 		return c;
+	}
+
+	public static void updateEntityFromDto(ClienteDTO dto, Cliente cliente) {
+		if (dto == null || cliente == null) {
+			return;
+		}
+
+		cliente.setNombre(dto.getNombre());
+		cliente.setApellidos(dto.getApellidos());
+		cliente.setUsuario(dto.getUsuario());
+		cliente.setTelefono(dto.getTelefono());
+		cliente.setEmail(dto.getEmail());
+		cliente.setDireccion(dto.getDireccion());
+		cliente.setEdad(dto.getEdad());
+		cliente.setOcupacionLaboral(dto.getOcupacionLaboral());
+		cliente.setTipoVivienda(dto.getTipoVivienda());
+		cliente.setOtrasMascotas(dto.getOtrasMascotas());
+		cliente.setExperienciaMascotas(dto.getExperienciaMascotas());
+		cliente.setObservaciones(dto.getObservaciones());
+		cliente.setImagen(dto.getImagen());
 	}
 
 }
