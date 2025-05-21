@@ -77,7 +77,7 @@ public class Cliente implements UserDetails {
 	@Column(nullable = false)
 	private String observaciones;
 
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "LONGTEXT")
 	private String imagen;
 
 	@Enumerated(EnumType.STRING)
