@@ -61,7 +61,7 @@ public class Mascota {
     @Column(nullable = false)
     private String personalidad;
     
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String imagen;
     
     @Column(nullable = false)

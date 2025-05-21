@@ -58,7 +58,7 @@ public class Administrador implements UserDetails{
     @Column(nullable = false, length = 9)
     private String telefono;
     
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String imagen;
     
     @Enumerated(EnumType.STRING)
