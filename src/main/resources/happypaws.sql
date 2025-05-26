@@ -255,8 +255,3 @@ INSERT INTO mascota (nombre, sexo, especie, tamanio, edad, peso, esterilizado, v
 ('Luna', 'Hembra', 'Perro', 'Mediano', 3, 12.50, TRUE, TRUE, TRUE, 'Juguetona, amigable, le encanta correr en el parque.', 'imagen_luna.jpg', 'Necesita comida especial debido a una alergia.', 'Rescatada de la calle en condiciones difíciles, ahora busca un hogar amoroso.', TRUE, 237),
 ('Juno', 'Hembra', 'Gato', 'Pequeño', 1, 5.50, TRUE, TRUE, TRUE, 'Le encanta dormir.', 'imagen_juno.jpg', 'Necesita una pastilla diaria.', 'Rescatada de la calle en condiciones difíciles, ahora busca un hogar amoroso.', TRUE, 237),
 ('Carisma', 'Hembra', 'Perro', 'Grande', 7, 30.00, FALSE, TRUE, TRUE, 'Es muy protectora.', 'imagen_carisma.jpg', 'Ninguno.', 'Criada pero por temas personales la familia anterior no podía tenerla.', TRUE, 237);
-
-INSERT INTO reserva (id_mascota, id_cliente, id_administrador, estado, observaciones) VALUES 
-(7, 1, 1, 'Pendiente', 'El cliente ha mostrado interés en adoptar a la mascota.'),
-(7, 1, 1, 'Pendiente', 'Es urgente.'),
-(7, 1, 1, 'Pendiente', 'Esta reserva es de prueba.');
