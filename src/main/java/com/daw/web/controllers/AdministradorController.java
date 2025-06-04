@@ -41,7 +41,7 @@ public class AdministradorController {
 	}
 
 	@GetMapping("/{idAdministrador}")
-	public ResponseEntity<AdministradorDTO> cliente(@PathVariable int idAdministrador) {
+	public ResponseEntity<AdministradorDTO> administrador(@PathVariable int idAdministrador) {
 		Optional<Administrador> administrador = this.administradorService.findById(idAdministrador);
 		if (administrador.isEmpty()) {
 			return ResponseEntity.notFound().build();
